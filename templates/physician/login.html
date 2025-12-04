@@ -1,0 +1,226 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr" id="htmlLang">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Hekim Girişi - BCRIS</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 450px;
+            width: 100%;
+            padding: 40px;
+        }
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo {
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 0.95em;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        .links {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .links a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .links a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+        .links p {
+            margin: 10px 0;
+            color: #666;
+            font-size: 0.95em;
+        }
+        .messages {
+            margin-bottom: 20px;
+        }
+        .alert {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .alert-warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        .back-home {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-home a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9em;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .back-home a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo-container">
+            <img src="{% static 'logo.png' %}" alt="BCRIS Logo" class="logo" onerror="this.style.display='none'">
+            <h1 id="loginTitle">Hekim Girişi</h1>
+            <p class="subtitle" id="loginSubtitle">BCRIS - Breast Cancer Response Intelligence System</p>
+        </div>
+        
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username" id="usernameLabel">Kullanıcı Adı</label>
+                <input type="text" id="username" name="username" required autofocus>
+            </div>
+            
+            <div class="form-group">
+                <label for="password" id="passwordLabel">Şifre</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <button type="submit" class="btn-login" id="loginButton">Giriş Yap</button>
+        </form>
+        
+        <div class="links">
+            <p id="noAccountText">Henüz hesabınız yok mu?</p>
+            <a href="{% url 'rcb_predictor:physician_signup' %}" id="signupLink">Hekim Kaydı Oluştur →</a>
+        </div>
+        
+        <div class="back-home">
+            <a href="{% url 'rcb_predictor:index' %}" id="backHomeLink">← Ana Sayfaya Dön</a>
+        </div>
+    </div>
+    
+    <script>
+        let currentLang = 'tr';
+        let translations = {};
+        
+        // Load translations
+        fetch('{% static "physician_translations.json" %}')
+            .then(response => response.json())
+            .then(data => {
+                translations = data;
+                // Ana sayfadan dil tercihini al (localStorage)
+                const savedLang = localStorage.getItem('preferredLanguage') || 'tr';
+                changeLanguage(savedLang);
+            });
+        
+        function changeLanguage(lang) {
+            currentLang = lang;
+            
+            // Update content
+            if (translations[lang]) {
+                const t = translations[lang].login;
+                document.getElementById('pageTitle').textContent = t.title + ' - BCRIS';
+                document.getElementById('loginTitle').textContent = t.title;
+                document.getElementById('loginSubtitle').textContent = t.subtitle;
+                document.getElementById('usernameLabel').textContent = t.username;
+                document.getElementById('passwordLabel').textContent = t.password;
+                document.getElementById('loginButton').textContent = t.loginButton;
+                document.getElementById('noAccountText').textContent = t.noAccount;
+                document.getElementById('signupLink').textContent = t.signupLink;
+                document.getElementById('backHomeLink').textContent = t.backHome;
+            }
+        }
+    </script>
+</body>
+</html>

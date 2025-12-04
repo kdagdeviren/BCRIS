@@ -1,0 +1,309 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr" id="htmlLang">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Teşekkürler - BCRIS</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #e8f4f8 0%, #c8e6f0 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c5f7c 0%, #1e4a63 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .intro-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .intro-card h2 {
+            color: #2c5f7c;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+        .intro-card p {
+            color: #666;
+            font-size: 1.1em;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .stat-box .value {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .stat-box .label {
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+        .physicians-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        .physician-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border-left: 5px solid #667eea;
+        }
+        .physician-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .physician-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .physician-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: white;
+            flex-shrink: 0;
+        }
+        .physician-info h3 {
+            color: #2c5f7c;
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+        .physician-info .title {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        .physician-institution {
+            color: #666;
+            font-size: 1em;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .physician-stats {
+            display: flex;
+            gap: 20px;
+            justify-content: space-around;
+        }
+        .physician-stat {
+            text-align: center;
+        }
+        .physician-stat .value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .physician-stat .label {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 5px;
+        }
+        .back-home {
+            text-align: center;
+            margin: 40px 0;
+        }
+        .btn {
+            padding: 15px 35px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+        .empty-state .icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+        @media (max-width: 768px) {
+            .physicians-grid {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 1.8em;
+            }
+            .header p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 id="thanksTitle">🙏 Teşekkürler</h1>
+        <p id="thanksSubtitle">
+            BCRIS projesine veri katkısında bulunan değerli hekimlerimize<br>
+            ve kurumlarına en içten teşekkürlerimizi sunarız.
+        </p>
+    </div>
+    
+    <div class="container">
+        <div class="intro-card">
+            <h2 id="contributionTitle">Projeye Katkılarınız</h2>
+            <p id="contributionText">
+                Paylaştığınız hasta verileri sayesinde makine öğrenmesi modelimiz sürekli gelişiyor
+                ve daha doğru tahminler yapabiliyor. Her bir veri seti, meme kanseri tedavisinde
+                daha iyi sonuçlar elde etmemize yardımcı oluyor.
+            </p>
+            
+            {% if latest_training %}
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="value">{{ latest_training.total_patients }}</div>
+                    <div class="label">Toplam Hasta Verisi</div>
+                </div>
+                <div class="stat-box">
+                    <div class="value">{{ latest_training.accuracy|floatformat:1 }}%</div>
+                    <div class="label">Model Doğruluğu</div>
+                </div>
+                <div class="stat-box">
+                    <div class="value">{{ physicians.count }}</div>
+                    <div class="label">Katkıda Bulunan Hekim</div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        
+        {% if physicians %}
+        <div class="physicians-grid">
+            {% for physician in physicians %}
+            <div class="physician-card">
+                <div class="physician-header">
+                    <div class="physician-icon">👨‍⚕️</div>
+                    <div class="physician-info">
+                        <h3>{{ physician.full_name }}</h3>
+                        <div class="title">{{ physician.title|default:"Uzman Hekim" }}</div>
+                    </div>
+                </div>
+                
+                <div class="physician-institution">
+                    🏥 {{ physician.institution }}
+                    {% if physician.department %}
+                    <br>📋 {{ physician.department }}
+                    {% endif %}
+                </div>
+                
+                <div class="physician-stats">
+                    <div class="physician-stat">
+                        <div class="value">{{ physician.total_uploads }}</div>
+                        <div class="label">Veri Seti</div>
+                    </div>
+                    <div class="physician-stat">
+                        <div class="value">{{ physician.total_patients }}</div>
+                        <div class="label">Hasta</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="intro-card">
+            <div class="empty-state">
+                <div class="icon">👨‍⚕️</div>
+                <h2>Henüz veri katkısı bulunmuyor</h2>
+                <p>Siz de projeye katkıda bulunmak ister misiniz?</p>
+            </div>
+        </div>
+        {% endif %}
+        
+        <div class="back-home">
+            <a href="{% url 'rcb_predictor:index' %}" class="btn btn-primary" id="backHomeLink">← Ana Sayfaya Dön</a>
+        </div>
+    </div>
+    
+    <script>
+        let currentLang = 'tr';
+        let translations = {};
+        
+        // Load translations
+        fetch('{% static "physician_translations.json" %}')
+            .then(response => response.json())
+            .then(data => {
+                translations = data;
+                // Ana sayfadan dil tercihini al (localStorage)
+                const savedLang = localStorage.getItem('preferredLanguage') || 'tr';
+                changeLanguage(savedLang);
+            });
+        
+        function changeLanguage(lang) {
+            currentLang = lang;
+            
+            // Update content
+            if (translations[lang]) {
+                const t = translations[lang].thanks;
+                document.getElementById('pageTitle').textContent = t.title + ' - BCRIS';
+                document.getElementById('thanksTitle').textContent = t.title;
+                document.getElementById('thanksSubtitle').innerHTML = t.subtitle;
+                document.getElementById('contributionTitle').textContent = t.contributionTitle;
+                document.getElementById('contributionText').textContent = t.contributionText;
+                document.getElementById('backHomeLink').textContent = t.backHome;
+            }
+        }
+    </script>
+</body>
+</html>

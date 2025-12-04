@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCRIS - Admin Paneli</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #e8f4f8 0%, #c8e6f0 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            padding: 30px;
+        }
+        h1 {
+            color: #2c5f7c;
+            margin-bottom: 20px;
+        }
+        .message-list {
+            margin-top: 20px;
+        }
+        .message-item {
+            background: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        .message-item h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .message-item p {
+            color: #666;
+            line-height: 1.6;
+        }
+        .back-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .back-btn:hover {
+            background: #5568d3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{% url 'rcb_predictor:index' %}" class="back-btn">← Ana Sayfaya Dön</a>
+        <h1>Tedavi Mesajları Yönetimi</h1>
+        
+        <div class="message-list">
+            {% for message in messages %}
+            <div class="message-item">
+                <h3>{{ message.id }} - {{ message.title }}</h3>
+                <p><strong>Tip:</strong> {{ message.type }}</p>
+                <p><strong>Koşullar:</strong> {{ message.conditions }}</p>
+                <p><strong>Mesaj:</strong> {{ message.message }}</p>
+            </div>
+            {% empty %}
+            <p>Henüz mesaj bulunmamaktadır.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yüklemelerim - BCRIS</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #e8f4f8 0%, #c8e6f0 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c5f7c 0%, #1e4a63 100%);
+            color: white;
+            padding: 20px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .actions {
+            margin-bottom: 20px;
+        }
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+        .uploads-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .uploads-table th,
+        .uploads-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .uploads-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+        .uploads-table tr:hover {
+            background: #f8f9fa;
+        }
+        .status-badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            display: inline-block;
+        }
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .status-reviewing {
+            background: #cfe2ff;
+            color: #084298;
+        }
+        .status-processed {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+        .status-integrated {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+        .status-rejected {
+            background: #f8d7da;
+            color: #842029;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+        .empty-state .icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📋 Tüm Yüklemelerim</h1>
+        <p>{{ physician.full_name }} - {{ physician.institution }}</p>
+    </div>
+    
+    <div class="container">
+        <div class="card">
+            <div class="actions">
+                <a href="{% url 'rcb_predictor:physician_dashboard' %}" class="btn btn-secondary">← Dashboard'a Dön</a>
+            </div>
+            
+            {% if uploads %}
+            <table class="uploads-table">
+                <thead>
+                    <tr>
+                        <th>Dosya Adı</th>
+                        <th>Hasta Sayısı</th>
+                        <th>Durum</th>
+                        <th>Yüklenme Tarihi</th>
+                        <th>Açıklama</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for upload in uploads %}
+                    <tr>
+                        <td><strong>{{ upload.original_filename }}</strong></td>
+                        <td>{{ upload.patient_count }}</td>
+                        <td>
+                            <span class="status-badge status-{{ upload.processing_status }}">
+                                {{ upload.get_processing_status_display }}
+                            </span>
+                        </td>
+                        <td>{{ upload.uploaded_at|date:"d.m.Y H:i" }}</td>
+                        <td>{{ upload.description|default:"-" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <div class="empty-state">
+                <div class="icon">📁</div>
+                <h2>Henüz veri yüklemediniz</h2>
+                <p><a href="{% url 'rcb_predictor:physician_upload_data' %}">İlk veri setinizi yükleyin →</a></p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

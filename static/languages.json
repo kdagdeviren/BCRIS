@@ -1,0 +1,1271 @@
+{
+  "tr": {
+    "app_name": "Meme Kanseri Yanıt Değerlendirme Sistemi (BCRIS)",
+    "app_name_en": "Breast Cancer Response Intelligence System (BCRIS)",
+    "app_subtitle": "AI Destekli Rezidüel Kanser Yükü Tahmin Platformu",
+    "app_subtitle_tr": "Neoadjuvan Kemoterapi Sonrası RCB Kategorisi Tahmin Sistemi",
+    "excel_upload": "📊 Excel'den Özellik Yükle (.xlsx, .xls)",
+    "download_sample_excel": "📥 Örnek Excel Dosyası İndir",
+    "download_variable_format": "📋 Değişken Formatı Bilgi Dosyası İndir",
+    "rcb0_optimal": "🎯 RCB-0 (pCR) Optimal",
+    "rcb1_optimal": "🎯 RCB-1 Optimal",
+    "rcb2_optimal": "🎯 RCB-2 Optimal",
+    "rcb3_optimal": "🎯 RCB-3 Optimal",
+    "prediction_title": "Tahmin Sonuçları",
+    "predicted_category": "Tahmin Edilen Kategori",
+    "probability_distribution": "Olasılık Dağılımı",
+    "predict_button": "RCB Kategorisi Tahmin Et",
+    "treatment_messages_title": "💊 Tedavi Önerileri ve Bilgiler",
+    "treatment_messages_button": "💊 Tedaviler ve Öneriler",
+    "treatment_messages_count_single": "mesaj",
+    "treatment_messages_count_plural": "mesaj",
+    "color_legend_title": "Renk Kodlaması:",
+    "color_legend_info": "Mavi: Bilgi",
+    "color_legend_warning": "Sarı: Uyarı",
+    "color_legend_critical": "Kırmızı: Kritik",
+    "model_loaded": "✅ Model otomatik yüklendi",
+    "model_not_loaded": "⚠️ Model yüklenmedi - Lütfen model dosyasını yükleyin",
+    "model_status_error": "⚠️ Model durumu kontrol edilemedi",
+    "excel_loading": "⏳ Excel dosyası yükleniyor...",
+    "excel_loaded": "✅ Excel'den {count} özellik yüklendi",
+    "excel_invalid_values": "⚠️ {count} özellik için geçersiz değer bulundu",
+    "excel_error": "❌ Excel yükleme hatası",
+    "excel_format_error": "⚠️ Lütfen geçerli bir Excel dosyası seçin (.xlsx veya .xls)",
+    "excel_format_info": "Lütfen Excel dosyasının formatını kontrol edin:\n- İlk sütun: Değişken adı (i1, i2, ...)\n- İkinci sütun: Değer (1, 2, 3, ...)",
+    "model_not_loaded_alert": "⚠️ Model yüklenmedi! Lütfen önce model dosyasını yükleyin.",
+    "prediction_error": "Tahmin yapılırken hata oluştu",
+    "variable_info_not_loaded": "⚠️ Değişken bilgileri yüklenemedi. Lütfen sayfayı yenileyin.",
+    "variable_info_not_found": "⚠️ Bu değişken için bilgi bulunamadı.",
+    "rcb1_info_title": "Model Sınırlaması Hakkında Bilgi",
+    "rcb1_info_content": "RCB-1 Optimal kombinasyonu Feature Importance CSV ve Binary SHAP analizine göre optimize edilmiştir. Ancak multiclass model, RCB-1 sınıfını nadir tahmin etmektedir (Bootstrap analizi: Recall %72.4).",
+    "rcb1_info_normal": "Bu durum normaldir ve kombinasyonun yanlış olduğu anlamına gelmez. Model, RCB-1'i diğer sınıflardan ayırt etmekte zorlanabilir çünkü:",
+    "rcb_info_normal": "Bu durum normaldir ve kombinasyonun yanlış olduğu anlamına gelmez. Model, RCB-1'i diğer sınıflardan ayırt etmekte zorlanabilir çünkü:",
+    "rcb1_info_reason1": "RCB-1, RCB-0 ve RCB-2 arasında bir geçiş kategorisidir",
+    "rcb1_info_reason2": "Model, sınıf dengesizliği nedeniyle RCB-1'i nadir tahmin eder",
+    "rcb1_info_reason3": "Binary model RCB-1'i iyi ayırt ederken, multiclass bağlamda farklı davranabilir",
+    "rcb1_info_recommendation": "Öneri: Tahmin sonuçlarını klinik bulgularla birlikte değerlendirin. RCB-1 olasılığı düşük olsa bile, kombinasyon literatüre uygundur.",
+    "thesis_info_title": "Bu Uygulama Hakkında Önemli Bilgilendirme",
+    "thesis_info_intro": "Bu sistem, Yusuf Kağan DAĞDEVİREN tarafından geliştirilen bir doktora tez çalışmasıdır.",
+    "thesis_info_about_title": "SİSTEM HAKKINDA:",
+    "thesis_info_about_1": "• Bu RCB (Residual Cancer Burden) tahmin sistemi, sınırlı sayıda hasta verisi ile geliştirilmiştir.",
+    "thesis_info_about_2": "• Sistem, üç farklı makine öğrenmesi algoritması (Random Forest, XGBoost, LightGBM) test edilerek geliştirilmiştir.",
+    "thesis_info_about_3": "• En iyi performans LightGBM (Light Gradient Boosting Machine) algoritması ile elde edilmiştir.",
+    "thesis_info_about_4": "• Sistem, 64 farklı klinik, patolojik ve radyolojik değişken kullanarak RCB kategorisi tahmini yapmaktadır.",
+    "thesis_info_warnings_title": "ÖNEMLİ UYARILAR:",
+    "thesis_info_warning_1": "⚠️ Bu sistem net bir tedavi sonucu belirtmemektedir.",
+    "thesis_info_warning_2": "⚠️ Tahmin sonuçları mutlaka diğer klinik bulgular, laboratuvar sonuçları ve hasta öyküsü ile birlikte değerlendirilmelidir.",
+    "thesis_info_warning_3": "⚠️ Sistem şu anda test aşamasındadır ve klinik kullanım için henüz onaylanmamıştır.",
+    "thesis_info_warning_4": "⚠️ Bu sistem sadece araştırma amaçlıdır ve tıbbi karar verme sürecinde tek başına kullanılmamalıdır.",
+    "thesis_info_liability_title": "SINIRLI SORUMLULUK:",
+    "thesis_info_liability_text": "Bu sistemin kullanımından doğabilecek herhangi bir sonuçtan araştırmacı ve kurum sorumlu tutulamaz. Tıbbi kararlar mutlaka uzman hekimler tarafından verilmelidir.",
+    "thesis_info_understand": "Bu bilgilendirmeyi okudum ve anladım.",
+    "variable_info_title": "Değişken Bilgisi",
+    "variable_info_definition": "📋 Tanım",
+    "variable_info_how_measured": "🔬 Nasıl Ölçülür/Hesaplanır?",
+    "variable_info_clinical": "💊 Klinik Önemi",
+    "variable_info_how_to_find": "📄 Nasıl Bulunur?",
+    "tabs_patology": "Patoloji",
+    "tabs_oncology": "Onkoloji",
+    "tabs_demography": "Demografi",
+    "tabs_comorbidity": "Komorbidite",
+    "tabs_biochemistry": "Biyokimya",
+    "tabs_radiology": "Radyoloji",
+    "select_option": "--- Seçiniz ---",
+    "category_options": {
+      "i1": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "İnvaziv Duktal Karsinom": "İnvaziv Duktal Karsinom",
+        "İnvaziv Lobüler Karsinom": "İnvaziv Lobüler Karsinom",
+        "Mikst (Duktal + Lobüler)": "Mikst (Duktal + Lobüler)",
+        "DCIS": "DCIS",
+        "Diğer Nadir Tipler": "Diğer Nadir Tipler"
+      },
+      "i2": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Güçlü Pozitif": "Güçlü Pozitif",
+        "Negatif": "Negatif",
+        "Pozitif": "Pozitif",
+        "Zayıf Pozitif": "Zayıf Pozitif"
+      },
+      "i3": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Güçlü Pozitif": "Güçlü Pozitif",
+        "Negatif": "Negatif",
+        "Pozitif": "Pozitif",
+        "Zayıf Pozitif": "Zayıf Pozitif"
+      },
+      "i4": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Ekvokal": "Ekvokal",
+        "HER2-düşük": "HER2-düşük",
+        "Negatif": "Negatif",
+        "Pozitif": "Pozitif"
+      },
+      "i5": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "HER2-Düşük": "HER2-Düşük",
+        "HER2-Zengin": "HER2-Zengin",
+        "Luminal B (HER2 Negatif)": "Luminal B (HER2 Negatif)",
+        "Luminal B (HER2 Pozitif)": "Luminal B (HER2 Pozitif)",
+        "Luminal A": "Luminal A",
+        "Triple Negatif": "Triple Negatif"
+      },
+      "i6": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Düşük": "Düşük",
+        "Orta": "Orta",
+        "Yüksek": "Yüksek"
+      },
+      "i7": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Derece 1": "Derece 1",
+        "Derece 2": "Derece 2",
+        "Derece 3": "Derece 3"
+      },
+      "i8": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Derece 1": "Derece 1",
+        "Derece 2": "Derece 2",
+        "Derece 3": "Derece 3"
+      },
+      "i9": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Derece 1": "Derece 1",
+        "Derece 2": "Derece 2",
+        "Derece 3": "Derece 3"
+      },
+      "i10": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "G1": "G1",
+        "G2": "G2",
+        "G3": "G3"
+      },
+      "i12": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "<%10": "<%10",
+        "%10-%50": "%10-%50",
+        ">%50": ">%50"
+      },
+      "i13": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Var": "Var",
+        "Yok": "Yok"
+      },
+      "i14": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Yok": "Yok",
+        "Lenf Nodu": "Lenf Nodu",
+        "Dermal Lenfatik": "Dermal Lenfatik",
+        "Uzak Metastaz": "Uzak Metastaz"
+      },
+      "i15": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Evre IA": "Evre IA",
+        "Evre IB": "Evre IB",
+        "Evre IIA": "Evre IIA",
+        "Evre IIB": "Evre IIB",
+        "Evre IIIA": "Evre IIIA",
+        "Evre IIIB": "Evre IIIB",
+        "Evre IIIC": "Evre IIIC",
+        "Evre IV": "Evre IV"
+      },
+      "i16": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Sağ": "Sağ",
+        "Sol": "Sol"
+      },
+      "i17": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Zayıf": "Zayıf",
+        "Normal kilolu": "Normal kilolu",
+        "Fazla kilolu": "Fazla kilolu",
+        "Obez (1. Derece)": "Obez (1. Derece)",
+        "Obez (2. Derece)": "Obez (2. Derece)",
+        "Obez (3. Derece)": "Obez (3. Derece)"
+      },
+      "i18": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Genç Erişkin": "Genç Erişkin",
+        "Erken Orta Yaş": "Erken Orta Yaş",
+        "Orta Yaş": "Orta Yaş",
+        "Geç Orta Yaş": "Geç Orta Yaş",
+        "Yaşlı": "Yaşlı",
+        "İleri Yaşlı": "İleri Yaşlı"
+      },
+      "i19": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "0(-)": "0(-)",
+        "0(+)": "0(+)",
+        "A(-)": "A(-)",
+        "A(+)": "A(+)",
+        "B(-)": "B(-)",
+        "B(+)": "B(+)",
+        "AB(-)": "AB(-)",
+        "AB(+)": "AB(+)"
+      },
+      "i21": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Var": "Var",
+        "Yok": "Yok"
+      },
+      "i22": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Var": "Var",
+        "Yok": "Yok"
+      },
+      "i23": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Var": "Var",
+        "Yok": "Yok"
+      },
+      "i24": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Var": "Var",
+        "Yok": "Yok"
+      },
+      "i25": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Var": "Var",
+        "Yok": "Yok"
+      },
+      "i26": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Var": "Var",
+        "Yok": "Yok"
+      },
+      "i27": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Var": "Var",
+        "Yok": "Yok"
+      },
+      "i28": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Var": "Var",
+        "Yok": "Yok"
+      },
+      "i29": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Var": "Var",
+        "Yok": "Yok"
+      },
+      "i30": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Var": "Var",
+        "Yok": "Yok"
+      },
+      "i31": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Normal": "Normal",
+        "Düşük": "Düşük",
+        "Yüksek": "Yüksek"
+      },
+      "i32": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Normal": "Normal",
+        "Yüksek": "Yüksek"
+      },
+      "i33": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Normal": "Normal",
+        "Yüksek": "Yüksek"
+      },
+      "i34": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Normal": "Normal",
+        "Düşük": "Düşük",
+        "Yüksek": "Yüksek"
+      },
+      "i35": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Normal": "Normal",
+        "Yüksek": "Yüksek"
+      },
+      "i36": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Normal": "Normal",
+        "Yüksek": "Yüksek"
+      },
+      "i37": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Normal": "Normal",
+        "Yüksek": "Yüksek"
+      },
+      "i38": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Normal": "Normal",
+        "Düşük": "Düşük",
+        "Yüksek": "Yüksek"
+      },
+      "i39": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Normal": "Normal",
+        "Düşük": "Düşük",
+        "Yüksek": "Yüksek"
+      },
+      "i40": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Normal": "Normal",
+        "Yüksek": "Yüksek"
+      },
+      "i41": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Normal": "Normal",
+        "Düşük": "Düşük",
+        "Yüksek": "Yüksek"
+      },
+      "i42": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Normal": "Normal",
+        "Düşük": "Düşük",
+        "Yüksek": "Yüksek"
+      },
+      "i43": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Normal": "Normal",
+        "Düşük": "Düşük",
+        "Yüksek": "Yüksek"
+      },
+      "i44": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Normal": "Normal",
+        "Düşük": "Düşük"
+      },
+      "i45": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Düşük": "Düşük",
+        "Orta": "Orta",
+        "Yüksek": "Yüksek"
+      },
+      "i46": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Antrasiklin + Taksan": "Antrasiklin + Taksan",
+        "Sadece Antrasiklin": "Sadece Antrasiklin",
+        "Sadece Taksan": "Sadece Taksan",
+        "Platin Eklenenler": "Platin Eklenenler"
+      },
+      "i47": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Tam Kür": "Tam Kür",
+        "Eksik Kür": "Eksik Kür",
+        "Fazla Kür": "Fazla Kür"
+      },
+      "i48": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "BI-RADS 0": "BI-RADS 0",
+        "BI-RADS 1": "BI-RADS 1",
+        "BI-RADS 2": "BI-RADS 2",
+        "BI-RADS 4A": "BI-RADS 4A",
+        "BI-RADS 4B": "BI-RADS 4B",
+        "BI-RADS 4C": "BI-RADS 4C",
+        "BI-RADS 5": "BI-RADS 5"
+      },
+      "i49": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "A": "A",
+        "B": "B",
+        "C": "C",
+        "D": "D"
+      },
+      "i50": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Üst Dış Kuadran (UOQ)": "Üst Dış Kuadran (UOQ)",
+        "Üst İç Kuadran (UIQ)": "Üst İç Kuadran (UIQ)",
+        "Alt Dış Kuadran (LOQ)": "Alt Dış Kuadran (LOQ)",
+        "Alt İç Kuadran (LIQ)": "Alt İç Kuadran (LIQ)",
+        "Retroareolar / Santral": "Retroareolar / Santral",
+        "Diğer/Yardımcı Yönler": "Diğer/Yardımcı Yönler"
+      },
+      "i51": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Architectural Distortion": "Architectural Distortion",
+        "Asimetri": "Asimetri",
+        "Kalsifikasyon": "Kalsifikasyon",
+        "Solid kitle": "Solid kitle"
+      },
+      "i52": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Kalsifikasyona Eşlik Eden": "Kalsifikasyona Eşlik Eden",
+        "Kitleye Eşlik Eden": "Kitleye Eşlik Eden",
+        "Tek Başına": "Tek Başına"
+      },
+      "i53": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Düzensiz": "Düzensiz",
+        "Oval": "Oval",
+        "Yuvarlak": "Yuvarlak"
+      },
+      "i54": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Belirsiz": "Belirsiz",
+        "Düzensiz": "Düzensiz",
+        "Düzgün": "Düzgün",
+        "Mikrolobüle": "Mikrolobüle",
+        "Spiküle": "Spiküle"
+      },
+      "i55": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Düşük Dansite": "Düşük Dansite",
+        "Eş Dansite": "Eş Dansite",
+        "Yüksek Dansite": "Yüksek Dansite"
+      },
+      "i56": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Amorf": "Amorf",
+        "Coarse/Popcorn": "Coarse/Popcorn",
+        "İnce Lineer": "İnce Lineer",
+        "Kalsifikasyon Yok": "Kalsifikasyon Yok",
+        "Kesin Benign": "Kesin Benign",
+        "Pleomorfik": "Pleomorfik",
+        "Yuvarlak/Punctate": "Yuvarlak/Punctate"
+      },
+      "i57": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Bölgesel": "Bölgesel",
+        "Diffüz": "Diffüz",
+        "Gruplu": "Gruplu",
+        "Kalsifikasyon Yok": "Kalsifikasyon Yok",
+        "Lineer": "Lineer",
+        "Segmental": "Segmental"
+      },
+      "i58": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Asimetri Yok": "Asimetri Yok",
+        "Fokal": "Fokal",
+        "Gelişen": "Gelişen",
+        "Global": "Global",
+        "Tek Projeksiyon": "Tek Projeksiyon"
+      },
+      "i59": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Multifokal": "Multifokal",
+        "Multisentrik": "Multisentrik",
+        "Yok/Tek Odak": "Yok/Tek Odak",
+        "Değerlendirilemedi": "Değerlendirilemedi"
+      },
+      "i60": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Bilinmiyor": "Bilinmiyor",
+        "Evet": "Evet",
+        "Hayır": "Hayır"
+      },
+      "i61": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Evet": "Evet",
+        "Hayır": "Hayır",
+        "Tek Projeksiyon - Şüpheli": "Tek Projeksiyon - Şüpheli"
+      },
+      "i62": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Evet": "Evet",
+        "Hayır": "Hayır",
+        "Tek Projeksiyon - Şüpheli": "Tek Projeksiyon - Şüpheli"
+      },
+      "i63": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Evet": "Evet",
+        "Hayır": "Hayır"
+      },
+      "i64": {
+        "--- Seçiniz ---": "--- Seçiniz ---",
+        "Evet": "Evet",
+        "Hayır": "Hayır"
+      }
+    },
+    "copyright_text": "© 2025 Dağdeviren Ver.1.0",
+    "contact_button": "letişim",
+    "login_button": "Giriş",
+    "signup_button": "Kayıt",
+    "thanks_button": "Teşekkür",
+    "admin_button": "Admin",
+    "download_pdf_btn": "📄 PDF İndir",
+    "faq_button": "❓ Sık Sorulan Sorular",
+    "faq_title": "Sık Sorulan Sorular (FAQ)",
+    "academic_button": "📚 Teknik Detaylar",
+    "academic_title": "Teknik Detaylar",
+    "academic_toc": "İçindekiler",
+    "academic_section1_title": "1. Model ALL - Tüm Özellikler Analizi",
+    "academic_section1_desc": "Bu bölümde, 62 özellikten oluşan Model ALL'nin RCB sınıflandırmasındaki performansı değerlendirilmiştir.",
+    "academic_section1_1_title": "1.1. Model ALL Performans Karşılaştırması",
+    "academic_table1_1": "Tablo 1.1: Model ALL Performans Karşılaştırması",
+    "academic_best_combination": "En iyi kombinasyon",
+    "academic_findings": "Bulgular",
+    "academic_section2_title": "2. Model Seçim Stratejisi ve Sonuçları",
+    "academic_section3_title": "3. RCB Sınıflarına Göre SHAP Değerleri ile Özellik Etkisi Analizi",
+    "academic_section4_title": "4. Model Doğrulama ve Güvenilirlik Analizi",
+    "academic_section5_title": "5. Çoklu Lojistik Regresyon Analizi Bulguları (pCR Hesaplayıcı)",
+    "academic_back_to_top": "↑ Başa Dön",
+    "academic_table_algorithm": "Algoritma",
+    "academic_table_smote": "SMOTE",
+    "academic_table_cv_auc": "CV AUC (Mean±Std)",
+    "academic_table_test_auc": "Test AUC",
+    "academic_table_cv_acc": "CV Acc (Mean±Std)",
+    "academic_table_test_acc": "Test Acc",
+    "academic_table_cv_f1": "CV F1 (Mean±Std)",
+    "academic_table_test_f1": "Test F1",
+    "academic_section1_finding_1": "Model ALL performans karşılaştırmasında (SMOTE uygulanmış ve uygulanmamış senaryolar), LightGBM modeli SMOTE olmadan kullanıldığında en yüksek test AUC değerine (0.838) ulaşmış olup, genel olarak en üstün performansı sergilemiştir.",
+    "academic_section1_finding_2": "Bu kombinasyon, test F1 skorunda da (0.602) lider konumdadır.",
+    "academic_section1_finding_3": "XGBoost modeli her iki durumda da en düşük test AUC'lere (0.815 ve 0.825) sahip olmuştur.",
+    "academic_section1_finding_4": "RandomForest SMOTE'suz halde en düşük test F1 skorunu (0.547) vermiştir.",
+    "academic_section1_finding_5": "SMOTE uygulanması, tüm modellerde test accuracy ve F1 metriklerini hafif düşürürken, AUC değerlerini sınırlı etkilemiştir.",
+    "academic_section2_1_title": "2.1. Model Seçim Süreci",
+    "academic_section2_1_desc": "Bu çalışmada model seçimi iki aşamalı bir yaklaşımla gerçekleştirilmiştir:",
+    "academic_section2_1_stage1": "İlk aşama",
+    "academic_section2_1_stage1_desc": "Her model için en iyi algoritma ve SMOTE kombinasyonu belirlenmiştir.",
+    "academic_section2_1_criteria": "Seçim kriterleri öncelik sırasına göre: Test AUC (azalan sırada), CV–Test Gap (artan sırada), Test F1 (azalan sırada)",
+    "academic_section2_1_stage2": "İkinci aşama",
+    "academic_section2_1_stage2_desc": "Modeller arası karşılaştırmada klinik eşdeğerlik eşiği ±0.01 AUC olarak kabul edilmiş ve bu eşiğe giren adaylar için çok ölçütlü bağıl üstünlük analizi uygulanmıştır.",
+    "academic_section2_2_title": "2.2. Model Karşılaştırması: Model R vs Model ALL",
+    "academic_section2_2_finding_1": "Model R (RandomForest, SMOTE YOK) ile Model ALL (LightGBM, SMOTE YOK) arasında Test AUC değerleri pratik olarak eşittir (0.8383 vs 0.8380).",
+    "academic_section2_2_finding_2": "Model ALL'ın CV–Test Gap değeri belirgin biçimde daha düşüktür (≈0.0146 vs ≈0.0988).",
+    "academic_section2_2_finding_3": "Model ALL'ın Test F1 skoru hafifçe daha yüksektir (≈0.602 vs ≈0.598).",
+    "academic_section2_3_title": "2.3. Final Model Seçimi",
+    "academic_section2_3_desc": "Model ALL içinde algoritma seçiminde:",
+    "academic_section2_3_finding_1": "Birincil ölçüt olan Test AUC bakımından LightGBM (SMOTE YOK) RandomForest'a çok küçük bir farkla üstün gelmiştir (0.837956 vs 0.837619).",
+    "academic_section2_3_finding_2": "Bu nedenle LightGBM algoritması tercih edilmiştir.",
+    "academic_section2_3_finding_3": "Model ALL'ın daha geniş özellik kapsamı (62 değişken) ve daha düşük CV–Test Gap değeri, modelin genellenebilirliği ve klinik uygulanabilirliği açısından avantajlı görünmektedir.",
+    "academic_section3_1_title": "3.1. Sınıf Bazlı SHAP Analizi",
+    "academic_section3_1_rcb0_title": "RCB-0 Sınıfı için SHAP Analizi:",
+    "academic_section3_1_rcb0_1": "En yüksek etkiye sahip özellikler: Metastaz Yeri, Ki-67 ve PR.",
+    "academic_section3_1_rcb0_2": "Metastaz Yeri özelliği, yüksek değerler aldığında SHAP değerleri +2.0'a kadar çıkmakta, düşük değerler aldığında ise -2.0'a kadar düşmektedir.",
+    "academic_section3_1_rcb0_3": "PR ve ER özellikleri ters bir ilişki göstermektedir: yüksek PR ve ER değerleri model çıktısını negatif yönde etkilemektedir.",
+    "academic_section3_1_rcb1_title": "RCB-1 Sınıfı için SHAP Analizi:",
+    "academic_section3_1_rcb1_1": "En belirgin etkiye sahip özellik: BI-RADS.",
+    "academic_section3_1_rcb1_2": "BI-RADS özelliği, yüksek değerler aldığında SHAP değerleri +4.0'a kadar çıkmakta, düşük değerler aldığında ise -2.0'a kadar düşmektedir.",
+    "academic_section3_1_rcb1_3": "Meme Dansitesi, Lezyon Türü, Kalsifikasyon Dağılımı gibi radyolojik özellikler yüksek değerlerde pozitif etkiye sahiptir.",
+    "academic_section3_1_rcb2_title": "RCB-2 Sınıfı için SHAP Analizi:",
+    "academic_section3_1_rcb2_1": "En yüksek etkiye sahip özellikler: VKI Sınıfı, Yaş Grubu ve Lezyon Türü.",
+    "academic_section3_1_rcb2_2": "VKI Sınıfı özelliği, yüksek değerler aldığında SHAP değerleri +1.5'e kadar çıkmakta, düşük değerler aldığında ise -2.0'a kadar düşmektedir.",
+    "academic_section3_1_rcb2_3": "Nükleer Derece, Glukoz, Tiroid gibi özellikler yüksek değerlerde pozitif etki göstermektedir.",
+    "academic_section3_1_rcb3_title": "RCB-3 Sınıfı için SHAP Analizi:",
+    "academic_section3_1_rcb3_1": "En yüksek etkiye sahip özellikler: Tanı Evresi, Metastaz Yeri ve Kalsifikasyon Morfolojisi.",
+    "academic_section3_1_rcb3_2": "Tanı Evresi özelliği, yüksek değerler aldığında SHAP değerleri +1.0'a kadar çıkmakta, düşük değerler aldığında ise -1.0'a kadar düşmektedir.",
+    "academic_section3_2_title": "3.2. Global SHAP Özellik Önem Analizi",
+    "academic_section3_2_table_title": "Model ALL + LightGBM En Önemli 20 Özellik:",
+    "academic_section3_2_table_rank": "Sıra",
+    "academic_section3_2_table_feature": "Özellik Adı",
+    "academic_section3_2_table_shap": "Ortalama |SHAP| Değeri",
+    "academic_section3_2_finding_1": "En etkili özellik BI-RADS (~0.68) olurken, ikinci sırada Metastaz Yeri (~0.62) yer almıştır.",
+    "academic_section3_2_finding_2": "En düşük katkı sağlayan özellikler: Histolojik Tip (~0.05) ve Mitotik Derece (~0.08).",
+    "academic_section4_1_title": "4.1. Nested Cross-Validation Sonuçları",
+    "academic_section4_1_table": "Tablo 4.1: Nested CV Sonuçları - Sınıf Bazlı Özet İstatistikler",
+    "academic_section4_1_table_class": "RCB Sınıfı",
+    "academic_section4_1_table_inner": "Inner CV AUC (Mean ± Std)",
+    "academic_section4_1_table_outer": "Outer Test AUC (Mean ± Std)",
+    "academic_section4_1_table_gap": "Gap (Mean ± Std)",
+    "academic_section4_1_table_overfitting": "Overfitting Durumu",
+    "academic_section4_1_table_acceptable": "Kabul edilebilir",
+    "academic_section4_1_finding_1": "Tüm sınıflarda Gap değeri 0.10'un altında kalmış olup, genel tutarlılık gözlenmiştir.",
+    "academic_section4_1_finding_2": "RCB-1 sınıfı tüm fold'larda en tutarlı performansı sergilemiştir.",
+    "academic_section4_1_finding_3": "RCB-0, RCB-2 ve RCB-3 sınıfları için fold'lar arasında değişkenlik söz konusudur.",
+    "academic_section4_2_title": "4.2. Bootstrap Güven Aralıkları Sonuçları",
+    "academic_section4_2_table": "Tablo 4.2: Sınıf Bazlı Bootstrap %95 Güven Aralıkları - Precision, Recall, F1-Score",
+    "academic_section4_2_table1_metric": "Metrik",
+    "academic_section4_2_table1_mean": "Mean",
+    "academic_section4_2_table1_ci_low": "%95 CI (Alt)",
+    "academic_section4_2_table1_ci_high": "%95 CI (Üst)",
+    "academic_section4_2_table1_median": "Median",
+    "academic_section5_1_title": "5.1. Veri Setinin Yapılandırılması",
+    "academic_section5_1_table": "Tablo 5.1: Veri Seti Özellikleri ve Eğitim-Test Ayrımı",
+    "academic_section5_1_table_feature": "Özellik",
+    "academic_section5_1_table_train": "Eğitim Seti",
+    "academic_section5_1_table_test": "Test Seti",
+    "academic_section5_1_table_total": "Toplam",
+    "academic_section5_1_table_total_patients": "Toplam Hasta Sayısı",
+    "academic_section5_1_table_pcr": "pCR Sayısı (n, %)",
+    "academic_section5_1_table_nonpcr": "non-pCR Sayısı (n, %)",
+    "academic_section5_3_title": "5.3. Model Performanslarının Değerlendirilmesi",
+    "academic_section5_3_table": "Tablo 5.3: Modellerin Performans Karşılaştırması (Optimal Eşik Değerleri ile)",
+    "academic_section5_3_table_perf_metric": "Performans Metriği",
+    "academic_section5_3_table_model1_l1": "Model 1 (Lasso)",
+    "academic_section5_3_table_model1_l2": "Model 1 (Ridge)",
+    "academic_section5_3_table_model2_l1": "Model 2 (Lasso)",
+    "academic_section5_3_table_model2_l2": "Model 2 (Ridge)",
+    "academic_section5_3_final_model": "Final Model",
+    "academic_section5_3_final_model_desc": "Model 1 L2 (Ridge) - Optimal Eşik: 0.277",
+    "faq_back_button": "← Geri Dön",
+    "pdf_report_title": "RCB Tahmin Raporu",
+    "pdf_generated_at": "Oluşturulma Tarihi ve Saati",
+    "pdf_prediction_results": "Tahmin Sonuçları",
+    "pdf_predicted_category": "Tahmin Edilen Kategori",
+    "pdf_probability_distribution": "Olasılık Dağılımı",
+    "pdf_used_variables": "Kullanılan Değişkenler",
+    "pdf_variable_name": "Değişken",
+    "pdf_variable_value": "Seçilen Değer",
+    "pdf_generating": "PDF oluşturuluyor...",
+    "pdf_error": "PDF oluşturulurken hata oluştu",
+    "faq": {
+      "q1": "BCRIS nedir?",
+      "a1": "BCRIS (Breast Cancer Response Intelligence System), meme kanseri hastalarında neoadjuvan kemoterapi sonrası Rezidüel Kanser Yükü (RCB) kategorisini tahmin etmek için geliştirilmiş bir yapay zeka destekli tahmin sistemidir. Sistem, 64 farklı klinik, patolojik ve radyolojik değişken kullanarak RCB-0, RCB-1, RCB-2 veya RCB-3 kategorilerinden birini tahmin eder.",
+      "q2": "Bu sistem kim tarafından geliştirilmiştir?",
+      "a2": "BCRIS, Yusuf Kağan DAĞDEVİREN tarafından doktora tez çalışması kapsamında geliştirilmiştir. Sistem, sınırlı sayıda hasta verisi ile üç farklı makine öğrenmesi algoritması (Random Forest, XGBoost, LightGBM) test edilerek oluşturulmuştur.",
+      "q3": "Sistem hangi algoritmayı kullanmaktadır?",
+      "a3": "Sistem, en iyi performansı gösteren LightGBM (Light Gradient Boosting Machine) algoritmasını kullanmaktadır. Bu algoritma, Random Forest ve XGBoost ile karşılaştırıldığında daha yüksek doğruluk oranı göstermiştir.",
+      "q4": "Sistem kaç değişken kullanmaktadır?",
+      "a4": "Sistem toplam 64 farklı değişken kullanmaktadır. Bu değişkenler şu kategorilere ayrılmıştır: Patolojik değişkenler (histolojik tip, ER/PR/HER2 durumu, grade, vb.), Onkolojik değişkenler (evre, lenf nodu durumu, Ki-67, vb.), Demografik değişkenler (yaş, BMI, vb.), Komorbidite değişkenleri, Biyokimyasal değişkenler, Radyolojik değişkenler (mamografi, ultrasonografi bulguları).",
+      "q5": "Sistem nasıl çalışmaktadır?",
+      "a5": "Kullanıcı, hasta verilerini form üzerinden veya Excel dosyası yükleyerek sisteme girer. Sistem, girilen değişkenleri LightGBM modeline gönderir ve her RCB kategorisi için olasılık skorları hesaplar. En yüksek olasılığa sahip kategori tahmin edilen sonuç olarak gösterilir.",
+      "q6": "Excel dosyası formatı nasıl olmalıdır?",
+      "a6": "Excel dosyası iki sütundan oluşmalıdır: İlk sütun: Değişken kodu (i1, i2, i3, ... i64), İkinci sütun: Değişken değeri (1, 2, 3, ...). Sistem, örnek Excel dosyası ve değişken formatı bilgi dosyası indirme seçenekleri sunmaktadır.",
+      "q7": "Tahmin sonuçları nasıl yorumlanmalıdır?",
+      "a7": "Tahmin sonuçları, her RCB kategorisi için olasılık yüzdeleri ile birlikte gösterilir. En yüksek olasılığa sahip kategori tahmin edilen sonuçtur. Ancak, bu sonuçlar mutlaka diğer klinik bulgular, laboratuvar sonuçları ve hasta öyküsü ile birlikte değerlendirilmelidir. Sistem, net bir tedavi sonucu belirtmemektedir.",
+      "q8": "Olasılık skorları ne anlama gelmektedir?",
+      "a8": "Olasılık skorları, sistemin her RCB kategorisi için tahmin güvenilirliğini gösterir. Örneğin, RCB-0 için %60 olasılık, sistemin bu hastanın RCB-0 kategorisinde olma ihtimalini %60 olarak değerlendirdiği anlamına gelir. Yüksek olasılık skorları, tahminin daha güvenilir olduğunu gösterir.",
+      "q9": "RCB kategorileri ne anlama gelmektedir?",
+      "a9": "RCB-0 (pCR): Patolojik tam yanıt - Kemoterapi sonrası hiç kanser hücresi kalmamıştır. RCB-1: Minimal rezidüel hastalık - Çok az kanser hücresi kalmıştır. RCB-2: Orta düzeyde rezidüel hastalık - Orta miktarda kanser hücresi kalmıştır. RCB-3: Yüksek düzeyde rezidüel hastalık - Çok fazla kanser hücresi kalmıştır.",
+      "q10": "Sistemin sınırlamaları nelerdir?",
+      "a10": "Sistem, sınırlı sayıda hasta verisi ile geliştirilmiştir. Sistem şu anda test aşamasındadır ve klinik kullanım için henüz onaylanmamıştır. Sistem sadece araştırma amaçlıdır ve tıbbi karar verme sürecinde tek başına kullanılmamalıdır. Sistem, net bir tedavi sonucu belirtmemektedir. Tahmin sonuçları mutlaka uzman hekimler tarafından değerlendirilmelidir.",
+      "q11": "Sistem tıbbi karar verme için kullanılabilir mi?",
+      "a11": "Hayır. Bu sistem sadece araştırma amaçlıdır ve tıbbi karar verme sürecinde tek başına kullanılmamalıdır. Tahmin sonuçları mutlaka diğer klinik bulgular, laboratuvar sonuçları ve hasta öyküsü ile birlikte değerlendirilmelidir. Tıbbi kararlar mutlaka uzman hekimler tarafından verilmelidir.",
+      "q12": "Sistemin sorumluluğu kimdedir?",
+      "a12": "Bu sistemin kullanımından doğabilecek herhangi bir sonuçtan araştırmacı ve kurum sorumlu tutulamaz. Sistem, araştırma amaçlı geliştirilmiştir ve tıbbi karar verme sürecinde tek başına kullanılmamalıdır.",
+      "q13": "Tüm değişkenleri doldurmak zorunda mıyım?",
+      "a13": "Hayır, ancak daha fazla değişken doldurulduğunda tahmin doğruluğu artabilir. Sistem, girilen değişkenlere göre tahmin yapar. Eksik değişkenler için sistem varsayılan değerler kullanır.",
+      "q14": "PDF raporu nasıl indirilir?",
+      "a14": "Tahmin yapıldıktan sonra, tahmin sonuçlarının yanında görünen \"📄 PDF İndir\" butonuna tıklayarak PDF raporu indirebilirsiniz. PDF raporu, tahmin sonuçları, olasılık dağılımı grafiği, kullanılan değişkenler ve tarih/saat bilgisini içerir.",
+      "q15": "PCR Hesaplayıcı nedir?",
+      "a15": "PCR (Patolojik Tam Yanıt) Hesaplayıcı, sistem içinde bulunan ayrı bir modüldür. Bu modül, hastanın PCR (RCB-0) olma olasılığını hesaplar. PCR Hesaplayıcı'ya, ana sayfadaki \"🧬 PCR Hesaplayıcı\" butonuna tıklayarak erişebilirsiniz.",
+      "q16": "Sistem hatası alıyorum, ne yapmalıyım?",
+      "a16": "Sistem hatası alıyorsanız: 1) Sayfayı yenileyin (F5), 2) Tüm değişkenlerin doğru formatta girildiğinden emin olun, 3) Excel dosyası yüklüyorsanız, formatın doğru olduğundan emin olun, 4) Sorun devam ederse, lütfen sistem geliştiricisi ile iletişime geçin.",
+      "q17": "İletişim bilgileri nerede?",
+      "a17": "Sistem geliştiricisi ile iletişime geçmek için, sayfanın sağ üst köşesindeki \"📧 İletişim\" butonuna tıklayabilirsiniz. E-posta adresi: dagdeviren.kagan@gmail.com",
+      "q18": "Sistem hangi tarayıcılarda çalışır?",
+      "a18": "Sistem, modern web tarayıcılarında (Chrome, Firefox, Edge, Safari) çalışmaktadır. En iyi performans için güncel bir tarayıcı sürümü kullanmanız önerilir.",
+      "q19": "Verilerim güvende mi?",
+      "a19": "Sistem, tüm işlemleri tarayıcınızda (client-side) gerçekleştirir. Hasta verileri sunucuya gönderilmez ve kaydedilmez. Tahmin işlemi tamamlandıktan sonra veriler tarayıcı belleğinden silinir."
+    }
+  },
+  "en": {
+    "app_name": "Breast Cancer Response Intelligence System (BCRIS)",
+    "app_name_en": "Breast Cancer Response Intelligence System (BCRIS)",
+    "app_subtitle": "AI-Powered Residual Cancer Burden Prediction Platform",
+    "app_subtitle_tr": "Neoadjuvant Chemotherapy Post-Treatment RCB Category Prediction System",
+    "excel_upload": "📊 Load Features from Excel (.xlsx, .xls)",
+    "download_sample_excel": "📥 Download Sample Excel File",
+    "download_variable_format": "📋 Download Variable Format Info File",
+    "rcb0_optimal": "🎯 RCB-0 (pCR) Optimal",
+    "rcb1_optimal": "🎯 RCB-1 Optimal",
+    "rcb2_optimal": "🎯 RCB-2 Optimal",
+    "rcb3_optimal": "🎯 RCB-3 Optimal",
+    "prediction_title": "Prediction Results",
+    "predicted_category": "Predicted Category",
+    "probability_distribution": "Probability Distribution",
+    "predict_button": "Predict RCB Category",
+    "treatment_messages_title": "💊 Treatment Recommendations and Information",
+    "treatment_messages_button": "💊 Treatments and Recommendations",
+    "treatment_messages_count_single": "message",
+    "treatment_messages_count_plural": "messages",
+    "color_legend_title": "Color Coding:",
+    "color_legend_info": "Blue: Information",
+    "color_legend_warning": "Yellow: Warning",
+    "color_legend_critical": "Red: Critical",
+    "model_loaded": "✅ Model automatically loaded",
+    "model_not_loaded": "⚠️ Model not loaded - Please upload model file",
+    "model_status_error": "⚠️ Model status could not be checked",
+    "excel_loading": "⏳ Loading Excel file...",
+    "excel_loaded": "✅ {count} features loaded from Excel",
+    "excel_invalid_values": "⚠️ Invalid values found for {count} features",
+    "excel_error": "❌ Excel loading error",
+    "excel_format_error": "⚠️ Please select a valid Excel file (.xlsx or .xls)",
+    "excel_format_info": "Please check the Excel file format:\n- First column: Variable name (i1, i2, ...)\n- Second column: Value (1, 2, 3, ...)",
+    "model_not_loaded_alert": "⚠️ Model not loaded! Please upload model file first.",
+    "prediction_error": "Error occurred while making prediction",
+    "variable_info_not_loaded": "⚠️ Variable information could not be loaded. Please refresh the page.",
+    "variable_info_not_found": "⚠️ Information not found for this variable.",
+    "rcb1_info_title": "Information About Model Limitations",
+    "rcb1_info_content": "RCB-1 Optimal combination has been optimized according to Feature Importance CSV and Binary SHAP analysis. However, the multiclass model rarely predicts RCB-1 class (Bootstrap analysis: Recall 72.4%).",
+    "rcb_info_normal": "This is normal and does not mean the combination is wrong. The model may have difficulty distinguishing RCB-1 from other classes because:",
+    "rcb1_info_reason1": "RCB-1 is a transition category between RCB-0 and RCB-2",
+    "rcb1_info_reason2": "The model rarely predicts RCB-1 due to class imbalance",
+    "rcb1_info_reason3": "While the binary model distinguishes RCB-1 well, it may behave differently in a multiclass context",
+    "rcb1_info_recommendation": "Recommendation: Evaluate prediction results together with clinical findings. Even if RCB-1 probability is low, the combination is consistent with the literature.",
+    "thesis_info_title": "Important Information About This Application",
+    "thesis_info_intro": "This system is a doctoral thesis study developed by Yusuf Kağan DAĞDEVİREN.",
+    "thesis_info_about_title": "ABOUT THE SYSTEM:",
+    "thesis_info_about_1": "• This RCB (Residual Cancer Burden) prediction system was developed with a limited number of patient data.",
+    "thesis_info_about_2": "• The system was developed by testing three different machine learning algorithms (Random Forest, XGBoost, LightGBM).",
+    "thesis_info_about_3": "• The best performance was achieved with the LightGBM (Light Gradient Boosting Machine) algorithm.",
+    "thesis_info_about_4": "• The system predicts RCB categories using 64 different clinical, pathological, and radiological variables.",
+    "thesis_info_warnings_title": "IMPORTANT WARNINGS:",
+    "thesis_info_warning_1": "⚠️ This system does not indicate a definitive treatment outcome.",
+    "thesis_info_warning_2": "⚠️ Prediction results must be evaluated together with other clinical findings, laboratory results, and patient history.",
+    "thesis_info_warning_3": "⚠️ The system is currently in the testing phase and has not yet been approved for clinical use.",
+    "thesis_info_warning_4": "⚠️ This system is for research purposes only and should not be used alone in medical decision-making.",
+    "thesis_info_liability_title": "LIMITED LIABILITY:",
+    "thesis_info_liability_text": "The researcher and institution cannot be held responsible for any consequences arising from the use of this system. Medical decisions must be made by specialist physicians.",
+    "thesis_info_understand": "I have read and understood this information.",
+    "variable_info_title": "Variable Information",
+    "variable_info_definition": "📋 Definition",
+    "variable_info_how_measured": "🔬 How is it Measured/Calculated?",
+    "variable_info_clinical": "💊 Clinical Significance",
+    "variable_info_how_to_find": "📄 How to Find?",
+    "tabs_patology": "Pathology",
+    "tabs_oncology": "Oncology",
+    "tabs_demography": "Demographics",
+    "tabs_comorbidity": "Comorbidity",
+    "tabs_biochemistry": "Biochemistry",
+    "tabs_radiology": "Radiology",
+    "select_option": "--- Select ---",
+    "category_options": {
+      "i1": {
+        "--- Seçiniz ---": "--- Select ---",
+        "İnvaziv Duktal Karsinom": "Invasive Ductal Carcinoma",
+        "İnvaziv Lobüler Karsinom": "Invasive Lobular Carcinoma",
+        "Mikst (Duktal + Lobüler)": "Mixed (Ductal + Lobular)",
+        "DCIS": "DCIS",
+        "Diğer Nadir Tipler": "Other Rare Types"
+      },
+      "i2": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Güçlü Pozitif": "Strongly Positive",
+        "Negatif": "Negative",
+        "Pozitif": "Positive",
+        "Zayıf Pozitif": "Weakly Positive"
+      },
+      "i3": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Güçlü Pozitif": "Strongly Positive",
+        "Negatif": "Negative",
+        "Pozitif": "Positive",
+        "Zayıf Pozitif": "Weakly Positive"
+      },
+      "i4": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Ekvokal": "Equivocal",
+        "HER2-düşük": "HER2-Low",
+        "Negatif": "Negative",
+        "Pozitif": "Positive"
+      },
+      "i5": {
+        "--- Seçiniz ---": "--- Select ---",
+        "HER2-Düşük": "HER2-Low",
+        "HER2-Zengin": "HER2-Enriched",
+        "Luminal B (HER2 Negatif)": "Luminal B (HER2 Negative)",
+        "Luminal B (HER2 Pozitif)": "Luminal B (HER2 Positive)",
+        "Luminal A": "Luminal A",
+        "Triple Negatif": "Triple Negative"
+      },
+      "i6": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Düşük": "Low",
+        "Orta": "Intermediate",
+        "Yüksek": "High"
+      },
+      "i7": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Derece 1": "Grade 1",
+        "Derece 2": "Grade 2",
+        "Derece 3": "Grade 3"
+      },
+      "i8": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Derece 1": "Grade 1",
+        "Derece 2": "Grade 2",
+        "Derece 3": "Grade 3"
+      },
+      "i9": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Derece 1": "Grade 1",
+        "Derece 2": "Grade 2",
+        "Derece 3": "Grade 3"
+      },
+      "i10": {
+        "--- Seçiniz ---": "--- Select ---",
+        "G1": "G1",
+        "G2": "G2",
+        "G3": "G3"
+      },
+      "i12": {
+        "--- Seçiniz ---": "--- Select ---",
+        "<%10": "<10%",
+        "%10-%50": "10-50%",
+        ">%50": ">50%"
+      },
+      "i13": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Var": "Yes",
+        "Yok": "No"
+      },
+      "i14": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Yok": "None",
+        "Lenf Nodu": "Lymph Node",
+        "Dermal Lenfatik": "Dermal Lymphatic",
+        "Uzak Metastaz": "Distant Metastasis"
+      },
+      "i15": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Evre IA": "Stage IA",
+        "Evre IB": "Stage IB",
+        "Evre IIA": "Stage IIA",
+        "Evre IIB": "Stage IIB",
+        "Evre IIIA": "Stage IIIA",
+        "Evre IIIB": "Stage IIIB",
+        "Evre IIIC": "Stage IIIC",
+        "Evre IV": "Stage IV"
+      },
+      "i16": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Sağ": "Right",
+        "Sol": "Left"
+      },
+      "i17": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Zayıf": "Underweight",
+        "Normal kilolu": "Normal Weight",
+        "Fazla kilolu": "Overweight",
+        "Obez (1. Derece)": "Obese (Grade 1)",
+        "Obez (2. Derece)": "Obese (Grade 2)",
+        "Obez (3. Derece)": "Obese (Grade 3)"
+      },
+      "i18": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Genç Erişkin": "Young Adult",
+        "Erken Orta Yaş": "Early Middle Age",
+        "Orta Yaş": "Middle Age",
+        "Geç Orta Yaş": "Late Middle Age",
+        "Yaşlı": "Elderly",
+        "İleri Yaşlı": "Advanced Elderly"
+      },
+      "i19": {
+        "--- Seçiniz ---": "--- Select ---",
+        "0(-)": "0(-)",
+        "0(+)": "0(+)",
+        "A(-)": "A(-)",
+        "A(+)": "A(+)",
+        "B(-)": "B(-)",
+        "B(+)": "B(+)",
+        "AB(-)": "AB(-)",
+        "AB(+)": "AB(+)"
+      },
+      "i21": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Var": "Yes",
+        "Yok": "No"
+      },
+      "i22": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Var": "Yes",
+        "Yok": "No"
+      },
+      "i23": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Var": "Yes",
+        "Yok": "No"
+      },
+      "i24": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Var": "Yes",
+        "Yok": "No"
+      },
+      "i25": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Var": "Yes",
+        "Yok": "No"
+      },
+      "i26": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Var": "Yes",
+        "Yok": "No"
+      },
+      "i27": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Var": "Yes",
+        "Yok": "No"
+      },
+      "i28": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Var": "Yes",
+        "Yok": "No"
+      },
+      "i29": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Var": "Yes",
+        "Yok": "No"
+      },
+      "i30": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Var": "Yes",
+        "Yok": "No"
+      },
+      "i31": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Normal": "Normal",
+        "Düşük": "Low",
+        "Yüksek": "High"
+      },
+      "i32": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Normal": "Normal",
+        "Yüksek": "High"
+      },
+      "i33": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Normal": "Normal",
+        "Yüksek": "High"
+      },
+      "i34": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Normal": "Normal",
+        "Düşük": "Low",
+        "Yüksek": "High"
+      },
+      "i35": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Normal": "Normal",
+        "Yüksek": "High"
+      },
+      "i36": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Normal": "Normal",
+        "Yüksek": "High"
+      },
+      "i37": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Normal": "Normal",
+        "Yüksek": "High"
+      },
+      "i38": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Normal": "Normal",
+        "Düşük": "Low",
+        "Yüksek": "High"
+      },
+      "i39": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Normal": "Normal",
+        "Düşük": "Low",
+        "Yüksek": "High"
+      },
+      "i40": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Normal": "Normal",
+        "Yüksek": "High"
+      },
+      "i41": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Normal": "Normal",
+        "Düşük": "Low",
+        "Yüksek": "High"
+      },
+      "i42": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Normal": "Normal",
+        "Düşük": "Low",
+        "Yüksek": "High"
+      },
+      "i43": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Normal": "Normal",
+        "Düşük": "Low",
+        "Yüksek": "High"
+      },
+      "i44": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Normal": "Normal",
+        "Düşük": "Low"
+      },
+      "i45": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Düşük": "Low",
+        "Orta": "Moderate",
+        "Yüksek": "High"
+      },
+      "i46": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Antrasiklin + Taksan": "Anthracycline + Taxane",
+        "Sadece Antrasiklin": "Anthracycline Only",
+        "Sadece Taksan": "Taxane Only",
+        "Platin Eklenenler": "Platinum-Containing"
+      },
+      "i47": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Tam Kür": "Complete Course",
+        "Eksik Kür": "Incomplete Course",
+        "Fazla Kür": "Excessive Course"
+      },
+      "i48": {
+        "--- Seçiniz ---": "--- Select ---",
+        "BI-RADS 0": "BI-RADS 0",
+        "BI-RADS 1": "BI-RADS 1",
+        "BI-RADS 2": "BI-RADS 2",
+        "BI-RADS 4A": "BI-RADS 4A",
+        "BI-RADS 4B": "BI-RADS 4B",
+        "BI-RADS 4C": "BI-RADS 4C",
+        "BI-RADS 5": "BI-RADS 5"
+      },
+      "i49": {
+        "--- Seçiniz ---": "--- Select ---",
+        "A": "A",
+        "B": "B",
+        "C": "C",
+        "D": "D"
+      },
+      "i50": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Üst Dış Kuadran (UOQ)": "Upper Outer Quadrant (UOQ)",
+        "Üst İç Kuadran (UIQ)": "Upper Inner Quadrant (UIQ)",
+        "Alt Dış Kuadran (LOQ)": "Lower Outer Quadrant (LOQ)",
+        "Alt İç Kuadran (LIQ)": "Lower Inner Quadrant (LIQ)",
+        "Retroareolar / Santral": "Retroareolar / Central",
+        "Diğer/Yardımcı Yönler": "Other/Auxiliary Views"
+      },
+      "i51": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Architectural Distortion": "Architectural Distortion",
+        "Asimetri": "Asymmetry",
+        "Kalsifikasyon": "Calcification",
+        "Solid kitle": "Solid Mass"
+      },
+      "i52": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Kalsifikasyona Eşlik Eden": "Accompanying Calcification",
+        "Kitleye Eşlik Eden": "Accompanying Mass",
+        "Tek Başına": "Alone"
+      },
+      "i53": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Düzensiz": "Irregular",
+        "Oval": "Oval",
+        "Yuvarlak": "Round"
+      },
+      "i54": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Belirsiz": "Indistinct",
+        "Düzensiz": "Irregular",
+        "Düzgün": "Smooth",
+        "Mikrolobüle": "Microlobulated",
+        "Spiküle": "Spiculated"
+      },
+      "i55": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Düşük Dansite": "Low Density",
+        "Eş Dansite": "Equal Density",
+        "Yüksek Dansite": "High Density"
+      },
+      "i56": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Amorf": "Amorphous",
+        "Coarse/Popcorn": "Coarse/Popcorn",
+        "İnce Lineer": "Fine Linear",
+        "Kalsifikasyon Yok": "No Calcification",
+        "Kesin Benign": "Definitely Benign",
+        "Pleomorfik": "Pleomorphic",
+        "Yuvarlak/Punctate": "Round/Punctate"
+      },
+      "i57": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Bölgesel": "Regional",
+        "Diffüz": "Diffuse",
+        "Gruplu": "Grouped",
+        "Kalsifikasyon Yok": "No Calcification",
+        "Lineer": "Linear",
+        "Segmental": "Segmental"
+      },
+      "i58": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Asimetri Yok": "No Asymmetry",
+        "Fokal": "Focal",
+        "Gelişen": "Developing",
+        "Global": "Global",
+        "Tek Projeksiyon": "Single Projection"
+      },
+      "i59": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Multifokal": "Multifocal",
+        "Multisentrik": "Multicentric",
+        "Yok/Tek Odak": "None/Single Focus",
+        "Değerlendirilemedi": "Not Evaluated"
+      },
+      "i60": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Bilinmiyor": "Unknown",
+        "Evet": "Yes",
+        "Hayır": "No"
+      },
+      "i61": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Evet": "Yes",
+        "Hayır": "No",
+        "Tek Projeksiyon - Şüpheli": "Single Projection - Suspicious"
+      },
+      "i62": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Evet": "Yes",
+        "Hayır": "No",
+        "Tek Projeksiyon - Şüpheli": "Single Projection - Suspicious"
+      },
+      "i63": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Evet": "Yes",
+        "Hayır": "No"
+      },
+      "i64": {
+        "--- Seçiniz ---": "--- Select ---",
+        "Evet": "Yes",
+        "Hayır": "No"
+      }
+    },
+    "copyright_text": "© 2025 Dağdeviren Ver.1.0",
+    "contact_button": "Contact",
+    "login_button": "Login",
+    "signup_button": "Sign Up",
+    "thanks_button": "Thanks",
+    "admin_button": "Admin",
+    "download_pdf_btn": "📄 Download PDF",
+    "faq_button": "❓ Frequently Asked Questions",
+    "faq_title": "Frequently Asked Questions (FAQ)",
+    "academic_button": "📚 Technical Details",
+    "academic_title": "Technical Details",
+    "academic_toc": "Table of Contents",
+    "academic_section1_title": "1. Model ALL - Complete Features Analysis",
+    "academic_section1_desc": "This section evaluates the performance of Model ALL, consisting of 62 features, in RCB classification.",
+    "academic_section1_1_title": "1.1. Model ALL Performance Comparison",
+    "academic_table1_1": "Table 1.1: Model ALL Performance Comparison",
+    "academic_best_combination": "Best combination",
+    "academic_findings": "Findings",
+    "academic_section2_title": "2. Model Selection Strategy and Results",
+    "academic_section3_title": "3. Feature Impact Analysis with SHAP Values by RCB Classes",
+    "academic_section4_title": "4. Model Validation and Reliability Analysis",
+    "academic_section5_title": "5. Multiple Logistic Regression Analysis Findings (pCR Calculator)",
+    "academic_back_to_top": "↑ Back to Top",
+    "academic_table_algorithm": "Algorithm",
+    "academic_table_smote": "SMOTE",
+    "academic_table_cv_auc": "CV AUC (Mean±Std)",
+    "academic_table_test_auc": "Test AUC",
+    "academic_table_cv_acc": "CV Acc (Mean±Std)",
+    "academic_table_test_acc": "Test Acc",
+    "academic_table_cv_f1": "CV F1 (Mean±Std)",
+    "academic_table_test_f1": "Test F1",
+    "academic_section1_finding_1": "In Model ALL performance comparison (with and without SMOTE scenarios), the LightGBM model achieved the highest test AUC value (0.838) when used without SMOTE, demonstrating overall superior performance.",
+    "academic_section1_finding_2": "This combination also leads in test F1 score (0.602).",
+    "academic_section1_finding_3": "The XGBoost model had the lowest test AUC values (0.815 and 0.825) in both scenarios.",
+    "academic_section1_finding_4": "RandomForest without SMOTE yielded the lowest test F1 score (0.547).",
+    "academic_section1_finding_5": "Applying SMOTE slightly decreased test accuracy and F1 metrics across all models while having limited impact on AUC values.",
+    "academic_section2_1_title": "2.1. Model Selection Process",
+    "academic_section2_1_desc": "In this study, model selection was performed using a two-stage approach:",
+    "academic_section2_1_stage1": "First stage",
+    "academic_section2_1_stage1_desc": "The best algorithm and SMOTE combination was determined for each model.",
+    "academic_section2_1_criteria": "Selection criteria in priority order: Test AUC (descending), CV–Test Gap (ascending), Test F1 (descending)",
+    "academic_section2_1_stage2": "Second stage",
+    "academic_section2_1_stage2_desc": "In inter-model comparison, a clinical equivalence threshold of ±0.01 AUC was accepted, and multi-criteria relative superiority analysis was applied to candidates within this threshold.",
+    "academic_section2_2_title": "2.2. Model Comparison: Model R vs Model ALL",
+    "academic_section2_2_finding_1": "Test AUC values between Model R (RandomForest, SMOTE NO) and Model ALL (LightGBM, SMOTE NO) are practically equal (0.8383 vs 0.8380).",
+    "academic_section2_2_finding_2": "Model ALL's CV–Test Gap value is significantly lower (≈0.0146 vs ≈0.0988).",
+    "academic_section2_2_finding_3": "Model ALL's Test F1 score is slightly higher (≈0.602 vs ≈0.598).",
+    "academic_section2_3_title": "2.3. Final Model Selection",
+    "academic_section2_3_desc": "In algorithm selection within Model ALL:",
+    "academic_section2_3_finding_1": "LightGBM (SMOTE NO) slightly outperformed RandomForest in terms of the primary criterion, Test AUC (0.837956 vs 0.837619).",
+    "academic_section2_3_finding_2": "Therefore, the LightGBM algorithm was preferred.",
+    "academic_section2_3_finding_3": "Model ALL's broader feature scope (62 variables) and lower CV–Test Gap value appear advantageous in terms of model generalizability and clinical applicability.",
+    "academic_section3_1_title": "3.1. Class-Based SHAP Analysis",
+    "academic_section3_1_rcb0_title": "SHAP Analysis for RCB-0 Class:",
+    "academic_section3_1_rcb0_1": "Features with highest impact: Metastasis Location, Ki-67, and PR.",
+    "academic_section3_1_rcb0_2": "The Metastasis Location feature reaches SHAP values up to +2.0 when taking high values and drops to -2.0 when taking low values.",
+    "academic_section3_1_rcb0_3": "PR and ER features show an inverse relationship: high PR and ER values negatively affect model output.",
+    "academic_section3_1_rcb1_title": "SHAP Analysis for RCB-1 Class:",
+    "academic_section3_1_rcb1_1": "Most prominent impact feature: BI-RADS.",
+    "academic_section3_1_rcb1_2": "The BI-RADS feature reaches SHAP values up to +4.0 when taking high values and drops to -2.0 when taking low values.",
+    "academic_section3_1_rcb1_3": "Radiological features such as Breast Density, Lesion Type, and Calcification Distribution have positive effects at high values.",
+    "academic_section3_1_rcb2_title": "SHAP Analysis for RCB-2 Class:",
+    "academic_section3_1_rcb2_1": "Features with highest impact: BMI Class, Age Group, and Lesion Type.",
+    "academic_section3_1_rcb2_2": "The BMI Class feature reaches SHAP values up to +1.5 when taking high values and drops to -2.0 when taking low values.",
+    "academic_section3_1_rcb2_3": "Features such as Nuclear Grade, Glucose, and Thyroid show positive effects at high values.",
+    "academic_section3_1_rcb3_title": "SHAP Analysis for RCB-3 Class:",
+    "academic_section3_1_rcb3_1": "Features with highest impact: Diagnosis Stage, Metastasis Location, and Calcification Morphology.",
+    "academic_section3_1_rcb3_2": "The Diagnosis Stage feature reaches SHAP values up to +1.0 when taking high values and drops to -1.0 when taking low values.",
+    "academic_section3_2_title": "3.2. Global SHAP Feature Importance Analysis",
+    "academic_section3_2_table_title": "Model ALL + LightGBM Top 20 Most Important Features:",
+    "academic_section3_2_table_rank": "Rank",
+    "academic_section3_2_table_feature": "Feature Name",
+    "academic_section3_2_table_shap": "Average |SHAP| Value",
+    "academic_section3_2_finding_1": "The most effective feature is BI-RADS (~0.68), followed by Metastasis Location (~0.62) in second place.",
+    "academic_section3_2_finding_2": "Features with lowest contribution: Histological Type (~0.05) and Mitotic Degree (~0.08).",
+    "academic_section4_1_title": "4.1. Nested Cross-Validation Results",
+    "academic_section4_1_table": "Table 4.1: Nested CV Results - Class-Based Summary Statistics",
+    "academic_section4_1_table_class": "RCB Class",
+    "academic_section4_1_table_inner": "Inner CV AUC (Mean ± Std)",
+    "academic_section4_1_table_outer": "Outer Test AUC (Mean ± Std)",
+    "academic_section4_1_table_gap": "Gap (Mean ± Std)",
+    "academic_section4_1_table_overfitting": "Overfitting Status",
+    "academic_section4_1_table_acceptable": "Acceptable",
+    "academic_section4_1_finding_1": "Gap values remained below 0.10 across all classes, indicating general consistency.",
+    "academic_section4_1_finding_2": "RCB-1 class demonstrated the most consistent performance across all folds.",
+    "academic_section4_1_finding_3": "Variability exists between folds for RCB-0, RCB-2, and RCB-3 classes.",
+    "academic_section4_2_title": "4.2. Bootstrap Confidence Interval Results",
+    "academic_section4_2_table1": "Table 4.2: Class-Based Bootstrap 95% Confidence Intervals - Precision, Recall, F1-Score",
+    "academic_section4_2_table1_metric": "Metric",
+    "academic_section4_2_table1_mean": "Mean",
+    "academic_section4_2_table1_ci_low": "95% CI (Lower)",
+    "academic_section4_2_table1_ci_high": "95% CI (Upper)",
+    "academic_section4_2_table1_median": "Median",
+    "academic_section5_1_title": "5.1. Dataset Structure",
+    "academic_section5_1_table": "Table 5.1: Dataset Characteristics and Train-Test Split",
+    "academic_section5_1_table_feature": "Feature",
+    "academic_section5_1_table_train": "Training Set",
+    "academic_section5_1_table_test": "Test Set",
+    "academic_section5_1_table_total": "Total",
+    "academic_section5_1_table_total_patients": "Total Number of Patients",
+    "academic_section5_1_table_pcr": "pCR Count (n, %)",
+    "academic_section5_1_table_nonpcr": "non-pCR Count (n, %)",
+    "academic_section5_3_title": "5.3. Model Performance Evaluation",
+    "academic_section5_3_table": "Table 5.3: Model Performance Comparison (with Optimal Threshold Values)",
+    "academic_section5_3_table_perf_metric": "Performance Metric",
+    "academic_section5_3_table_model1_l1": "Model 1 (Lasso)",
+    "academic_section5_3_table_model1_l2": "Model 1 (Ridge)",
+    "academic_section5_3_table_model2_l1": "Model 2 (Lasso)",
+    "academic_section5_3_table_model2_l2": "Model 2 (Ridge)",
+    "academic_section5_3_final_model": "Final Model",
+    "academic_section5_3_final_model_desc": "Model 1 L2 (Ridge) - Optimal Threshold: 0.277",
+    "faq_back_button": "← Back",
+    "pdf_report_title": "RCB Prediction Report",
+    "pdf_generated_at": "Generated Date and Time",
+    "pdf_prediction_results": "Prediction Results",
+    "pdf_predicted_category": "Predicted Category",
+    "pdf_probability_distribution": "Probability Distribution",
+    "pdf_used_variables": "Used Variables",
+    "pdf_variable_name": "Variable",
+    "pdf_variable_value": "Selected Value",
+    "pdf_generating": "Generating PDF...",
+    "pdf_error": "Error occurred while generating PDF",
+    "faq": {
+      "q1": "What is BCRIS?",
+      "a1": "BCRIS (Breast Cancer Response Intelligence System) is an AI-powered prediction system developed to predict Residual Cancer Burden (RCB) categories in breast cancer patients after neoadjuvant chemotherapy. The system uses 64 different clinical, pathological, and radiological variables to predict one of the RCB-0, RCB-1, RCB-2, or RCB-3 categories.",
+      "q2": "Who developed this system?",
+      "a2": "BCRIS was developed by Yusuf Kağan DAĞDEVİREN as part of a doctoral thesis study. The system was created by testing three different machine learning algorithms (Random Forest, XGBoost, LightGBM) with a limited number of patient data.",
+      "q3": "Which algorithm does the system use?",
+      "a3": "The system uses the LightGBM (Light Gradient Boosting Machine) algorithm, which showed the best performance. This algorithm demonstrated higher accuracy rates compared to Random Forest and XGBoost.",
+      "q4": "How many variables does the system use?",
+      "a4": "The system uses a total of 64 different variables. These variables are divided into the following categories: Pathological variables (histological type, ER/PR/HER2 status, grade, etc.), Oncological variables (stage, lymph node status, Ki-67, etc.), Demographic variables (age, BMI, etc.), Comorbidity variables, Biochemical variables, Radiological variables (mammography, ultrasonography findings).",
+      "q5": "How does the system work?",
+      "a5": "Users enter patient data into the system through the form or by uploading an Excel file. The system sends the entered variables to the LightGBM model and calculates probability scores for each RCB category. The category with the highest probability is displayed as the predicted result.",
+      "q6": "What should the Excel file format be?",
+      "a6": "The Excel file should consist of two columns: First column: Variable code (i1, i2, i3, ... i64), Second column: Variable value (1, 2, 3, ...). The system provides options to download sample Excel files and variable format information files.",
+      "q7": "How should prediction results be interpreted?",
+      "a7": "Prediction results are displayed with probability percentages for each RCB category. The category with the highest probability is the predicted result. However, these results must be evaluated together with other clinical findings, laboratory results, and patient history. The system does not indicate a definitive treatment outcome.",
+      "q8": "What do probability scores mean?",
+      "a8": "Probability scores indicate the system's prediction reliability for each RCB category. For example, a 60% probability for RCB-0 means the system evaluates the likelihood of this patient being in the RCB-0 category as 60%. Higher probability scores indicate more reliable predictions.",
+      "q9": "What do RCB categories mean?",
+      "a9": "RCB-0 (pCR): Pathological complete response - No cancer cells remain after chemotherapy. RCB-1: Minimal residual disease - Very few cancer cells remain. RCB-2: Moderate residual disease - Moderate amount of cancer cells remain. RCB-3: Extensive residual disease - Many cancer cells remain.",
+      "q10": "What are the limitations of the system?",
+      "a10": "The system was developed with a limited number of patient data. The system is currently in the testing phase and has not yet been approved for clinical use. The system is for research purposes only and should not be used alone in medical decision-making. The system does not indicate a definitive treatment outcome. Prediction results must be evaluated by specialist physicians.",
+      "q11": "Can the system be used for medical decision-making?",
+      "a11": "No. This system is for research purposes only and should not be used alone in medical decision-making. Prediction results must be evaluated together with other clinical findings, laboratory results, and patient history. Medical decisions must be made by specialist physicians.",
+      "q12": "Who is responsible for the system?",
+      "a12": "The researcher and institution cannot be held responsible for any consequences arising from the use of this system. The system was developed for research purposes and should not be used alone in medical decision-making.",
+      "q13": "Do I have to fill in all variables?",
+      "a13": "No, but prediction accuracy may increase when more variables are filled. The system makes predictions based on the entered variables. The system uses default values for missing variables.",
+      "q14": "How do I download the PDF report?",
+      "a14": "After making a prediction, you can download the PDF report by clicking the \"📄 Download PDF\" button that appears next to the prediction results. The PDF report includes prediction results, probability distribution chart, used variables, and date/time information.",
+      "q15": "What is the PCR Calculator?",
+      "a15": "The PCR (Pathological Complete Response) Calculator is a separate module within the system. This module calculates the patient's probability of being PCR (RCB-0). You can access the PCR Calculator by clicking the \"🧬 PCR Calculator\" button on the main page.",
+      "q16": "I'm getting a system error, what should I do?",
+      "a16": "If you are experiencing a system error: 1) Refresh the page (F5), 2) Make sure all variables are entered in the correct format, 3) If uploading an Excel file, make sure the format is correct, 4) If the problem persists, please contact the system developer.",
+      "q17": "Where are the contact details?",
+      "a17": "To contact the system developer, you can click the \"📧 Contact\" button in the top right corner of the page. Email address: dagdeviren.kagan@gmail.com",
+      "q18": "Which browsers does the system work on?",
+      "a18": "The system works on modern web browsers (Chrome, Firefox, Edge, Safari). It is recommended to use an up-to-date browser version for best performance.",
+      "q19": "Is my data secure?",
+      "a19": "The system performs all operations in your browser (client-side). Patient data is not sent to or stored on the server. After the prediction process is completed, data is deleted from browser memory."
+    }
+  }
+}

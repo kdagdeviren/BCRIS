@@ -1,0 +1,241 @@
+/* BCRIS Admin Panel Özel Stiller */
+
+/* Logo boyutlandırma */
+.unfold-logo img {
+    max-height: 50px !important;
+    width: auto !important;
+    object-fit: contain !important;
+}
+
+/* Sidebar logo */
+.unfold-sidebar-logo img {
+    max-height: 45px !important;
+    width: auto !important;
+    margin: 10px 0 !important;
+}
+
+/* Login sayfası logo */
+.unfold-login-logo img {
+    max-height: 120px !important;
+    width: auto !important;
+    margin-bottom: 20px !important;
+}
+
+/* Admin başlık */
+.unfold-header-title {
+    font-weight: 600 !important;
+    color: #1e40af !important;
+}
+
+/* Sidebar başlıkları */
+.unfold-sidebar-title {
+    font-weight: 600 !important;
+    color: #1e3a8a !important;
+    text-transform: uppercase !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.05em !important;
+}
+
+/* Sidebar linkleri */
+.unfold-sidebar-link {
+    border-radius: 8px !important;
+    transition: all 0.2s ease !important;
+}
+
+.unfold-sidebar-link:hover {
+    background-color: #dbeafe !important;
+    transform: translateX(4px) !important;
+}
+
+.unfold-sidebar-link.active {
+    background-color: #3b82f6 !important;
+    color: white !important;
+    font-weight: 600 !important;
+}
+
+/* İkonlar */
+.unfold-sidebar-icon {
+    color: #3b82f6 !important;
+}
+
+.unfold-sidebar-link.active .unfold-sidebar-icon {
+    color: white !important;
+}
+
+/* Kartlar */
+.unfold-card {
+    border-radius: 12px !important;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
+    border: 1px solid #e5e7eb !important;
+}
+
+/* Butonlar */
+.unfold-button-primary {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+}
+
+.unfold-button-primary:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Tablolar */
+.unfold-table {
+    border-radius: 8px !important;
+    overflow: hidden !important;
+}
+
+.unfold-table thead {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%) !important;
+}
+
+.unfold-table th {
+    font-weight: 600 !important;
+    color: #1e40af !important;
+    text-transform: uppercase !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.05em !important;
+}
+
+.unfold-table tbody tr:hover {
+    background-color: #f0f9ff !important;
+}
+
+/* Badge'ler */
+.unfold-badge {
+    border-radius: 6px !important;
+    font-weight: 600 !important;
+    padding: 4px 12px !important;
+}
+
+.unfold-badge-success {
+    background-color: #dcfce7 !important;
+    color: #166534 !important;
+}
+
+.unfold-badge-warning {
+    background-color: #fef3c7 !important;
+    color: #92400e !important;
+}
+
+.unfold-badge-error {
+    background-color: #fee2e2 !important;
+    color: #991b1b !important;
+}
+
+/* Form alanları */
+.unfold-input {
+    border-radius: 8px !important;
+    border: 2px solid #e5e7eb !important;
+    transition: all 0.2s ease !important;
+}
+
+.unfold-input:focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+/* Dashboard kartları */
+.unfold-dashboard-card {
+    border-radius: 12px !important;
+    background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%) !important;
+    border: 1px solid #e5e7eb !important;
+    transition: all 0.2s ease !important;
+}
+
+.unfold-dashboard-card:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Breadcrumb */
+.unfold-breadcrumb {
+    background-color: #f0f9ff !important;
+    border-radius: 8px !important;
+    padding: 8px 16px !important;
+}
+
+/* Mesajlar */
+.unfold-message {
+    border-radius: 8px !important;
+    border-left: 4px solid #3b82f6 !important;
+}
+
+.unfold-message-success {
+    background-color: #dcfce7 !important;
+    border-left-color: #16a34a !important;
+}
+
+.unfold-message-error {
+    background-color: #fee2e2 !important;
+    border-left-color: #dc2626 !important;
+}
+
+/* Pagination */
+.unfold-pagination {
+    border-radius: 8px !important;
+}
+
+.unfold-pagination-item {
+    border-radius: 6px !important;
+    transition: all 0.2s ease !important;
+}
+
+.unfold-pagination-item:hover {
+    background-color: #dbeafe !important;
+}
+
+.unfold-pagination-item.active {
+    background-color: #3b82f6 !important;
+    color: white !important;
+}
+
+/* Animasyonlar */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.unfold-card,
+.unfold-dashboard-card {
+    animation: fadeIn 0.3s ease !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .unfold-logo img,
+    .unfold-sidebar-logo img {
+        max-height: 35px !important;
+    }
+}

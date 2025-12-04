@@ -1,0 +1,427 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr" id="htmlLang">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Hekim Kaydı - BCRIS</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .signup-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 700px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo {
+            max-width: 120px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        h1 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.95em;
+            transition: all 0.3s;
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        .form-group .helptext {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 5px;
+            display: block;
+        }
+        .form-group .errorlist {
+            list-style: none;
+            padding: 0;
+            margin: 5px 0 0 0;
+        }
+        .form-group .errorlist li {
+            color: #e53e3e;
+            font-size: 0.85em;
+            margin-top: 3px;
+        }
+        .kvkk-warning {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+            color: #856404;
+        }
+        .kvkk-warning strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #d39e00;
+        }
+        .btn-signup {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        .btn-signup:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        .links {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .links a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .links a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+        .links p {
+            margin: 10px 0;
+            color: #666;
+            font-size: 0.95em;
+        }
+        .messages {
+            margin-bottom: 20px;
+        }
+        .alert {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .back-home {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-home a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+        .back-home a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .signup-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="logo-container">
+            <img src="{% static 'logo.png' %}" alt="BCRIS Logo" class="logo" onerror="this.style.display='none'">
+            <h1 id="signupTitle">Hekim Kaydı</h1>
+            <p class="subtitle" id="signupSubtitle">
+                Sisteme kayıt olarak hasta verilerinizi paylaşabilir ve<br>
+                makine öğrenmesi modelinin gelişimine katkıda bulunabilirsiniz.
+            </p>
+        </div>
+        
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <div class="kvkk-warning">
+            <strong id="kvkkWarning">⚠️ KVKK Uyarısı</strong>
+            <span id="kvkkText">Kimlik kartı yüklerken TC kimlik numaranızı kapatmayı unutmayın!</span>
+        </div>
+        
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                        <ul class="errorlist">
+                            {% for error in form.username.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.full_name.id_for_label }}">{{ form.full_name.label }}</label>
+                    {{ form.full_name }}
+                    {% if form.full_name.errors %}
+                        <ul class="errorlist">
+                            {% for error in form.full_name.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <ul class="errorlist">
+                            {% for error in form.email.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.phone.id_for_label }}">{{ form.phone.label }}</label>
+                    {{ form.phone }}
+                    {% if form.phone.errors %}
+                        <ul class="errorlist">
+                            {% for error in form.phone.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="{{ form.institution.id_for_label }}">{{ form.institution.label }}</label>
+                    {{ form.institution }}
+                    {% if form.institution.errors %}
+                        <ul class="errorlist">
+                            {% for error in form.institution.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.department.id_for_label }}">{{ form.department.label }}</label>
+                    {{ form.department }}
+                    {% if form.department.errors %}
+                        <ul class="errorlist">
+                            {% for error in form.department.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
+                    {{ form.title }}
+                    {% if form.title.errors %}
+                        <ul class="errorlist">
+                            {% for error in form.title.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+                    {{ form.password1 }}
+                    {% if form.password1.errors %}
+                        <ul class="errorlist">
+                            {% for error in form.password1.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
+                    {{ form.password2 }}
+                    {% if form.password2.errors %}
+                        <ul class="errorlist">
+                            {% for error in form.password2.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="{{ form.id_card_image.id_for_label }}">{{ form.id_card_image.label }}</label>
+                    {{ form.id_card_image }}
+                    <span class="helptext">{{ form.id_card_image.help_text }}</span>
+                    {% if form.id_card_image.errors %}
+                        <ul class="errorlist">
+                            {% for error in form.id_card_image.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <button type="submit" class="btn-signup">Kayıt Ol</button>
+        </form>
+        
+        <div class="links">
+            <p>Zaten hesabınız var mı?</p>
+            <a href="{% url 'rcb_predictor:physician_login' %}">Giriş Yap →</a>
+        </div>
+        
+        <div class="back-home">
+            <a href="{% url 'rcb_predictor:index' %}" id="backHomeLink">← Ana Sayfaya Dön</a>
+        </div>
+    </div>
+    
+    <script>
+        let currentLang = 'tr';
+        let translations = {};
+        
+        // Load translations
+        fetch('{% static "physician_translations.json" %}')
+            .then(response => response.json())
+            .then(data => {
+                translations = data;
+                // Ana sayfadan dil tercihini al (localStorage)
+                const savedLang = localStorage.getItem('preferredLanguage') || 'tr';
+                changeLanguage(savedLang);
+            });
+        
+        function changeLanguage(lang) {
+            currentLang = lang;
+            
+            // Update content
+            if (translations[lang]) {
+                const t = translations[lang].signup;
+                document.getElementById('pageTitle').textContent = t.title + ' - BCRIS';
+                document.getElementById('signupTitle').textContent = t.title;
+                document.getElementById('signupSubtitle').innerHTML = t.subtitle;
+                document.getElementById('kvkkWarning').textContent = t.kvkkWarning;
+                document.getElementById('kvkkText').textContent = t.kvkkText;
+                document.getElementById('backHomeLink').textContent = t.backHome;
+                
+                // Form alanları - Label'ları güncelle
+                const labels = document.querySelectorAll('label');
+                labels.forEach(label => {
+                    const forAttr = label.getAttribute('for');
+                    if (forAttr) {
+                        if (forAttr.includes('username')) label.textContent = t.username;
+                        else if (forAttr.includes('full_name')) label.textContent = t.fullName;
+                        else if (forAttr.includes('email')) label.textContent = t.email;
+                        else if (forAttr.includes('phone')) label.textContent = t.phone;
+                        else if (forAttr.includes('institution')) label.textContent = t.institution;
+                        else if (forAttr.includes('department')) label.textContent = t.department;
+                        else if (forAttr.includes('title')) label.textContent = t.title;
+                        else if (forAttr.includes('password1')) label.textContent = t.password;
+                        else if (forAttr.includes('password2')) label.textContent = t.passwordConfirm;
+                        else if (forAttr.includes('id_card_image')) label.textContent = t.idCard;
+                    }
+                });
+                
+                // Placeholder'ları güncelle
+                const inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], input[type="password"]');
+                inputs.forEach(input => {
+                    const id = input.getAttribute('id');
+                    if (id) {
+                        if (id.includes('username')) input.placeholder = t.username;
+                        else if (id.includes('full_name')) input.placeholder = t.fullName;
+                        else if (id.includes('email')) input.placeholder = t.email;
+                        else if (id.includes('phone')) input.placeholder = t.phone;
+                        else if (id.includes('institution')) input.placeholder = t.institution;
+                        else if (id.includes('department')) input.placeholder = t.department;
+                        else if (id.includes('title')) input.placeholder = t.title;
+                        else if (id.includes('password1')) input.placeholder = t.password;
+                        else if (id.includes('password2')) input.placeholder = t.passwordConfirm;
+                    }
+                });
+                
+                // Help text güncelle
+                const helptext = document.querySelector('.helptext');
+                if (helptext) helptext.textContent = t.idCardHelp;
+                
+                // Buton güncelle
+                const submitBtn = document.querySelector('.btn-signup');
+                if (submitBtn) submitBtn.textContent = t.signupButton;
+                
+                // Alt linkler güncelle
+                const linksP = document.querySelector('.links p');
+                if (linksP) linksP.textContent = t.hasAccount;
+                const linksA = document.querySelector('.links a');
+                if (linksA) linksA.textContent = t.loginLink;
+            }
+        }
+    </script>
+</body>
+</html>
