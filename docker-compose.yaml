@@ -1,26 +1,48 @@
 version: '3.8'
 
 services:
+  db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: bcris
+      POSTGRES_USER: bcris_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme123}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bcris_user -d bcris"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - bcris_network
+
   web:
     build: .
-    container_name: bcris_web
     restart: unless-stopped
     ports:
-      - "8000:8000"
+      - "${PORT:-8000}:8000"
     environment:
-      - DJANGO_SETTINGS_MODULE=bcris_project.settings
-      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
-      - DJANGO_DEBUG=False
-      - DJANGO_ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS}
-      - DATABASE_URL=${DATABASE_URL}
-      - POSTGRES_DB=${POSTGRES_DB:-bcris}
-      - POSTGRES_USER=${POSTGRES_USER:-bcris_user}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_HOST=${POSTGRES_HOST:-db}
-      - POSTGRES_PORT=${POSTGRES_PORT:-5432}
+      # Django Settings
+      DJANGO_SETTINGS_MODULE: bcris_project.settings_production
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-please-change-this-secret-key-in-production}
+      DJANGO_DEBUG: ${DJANGO_DEBUG:-False}
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1}
+      
+      # Database - Otomatik yapılandırma
+      DATABASE_URL: postgresql://bcris_user:${POSTGRES_PASSWORD:-changeme123}@db:5432/bcris
+      POSTGRES_DB: bcris
+      POSTGRES_USER: bcris_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme123}
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      
+      # Security (production için)
+      SECURE_SSL_REDIRECT: ${SECURE_SSL_REDIRECT:-False}
+      SESSION_COOKIE_SECURE: ${SESSION_COOKIE_SECURE:-False}
+      CSRF_COOKIE_SECURE: ${CSRF_COOKIE_SECURE:-False}
     volumes:
-      # Veritabanı (SQLite kullanıyorsanız)
-      - db_data:/app/db.sqlite3
       # Media dosyaları (yüklenen dosyalar)
       - media_data:/app/media
       # ML Model dosyaları
@@ -30,30 +52,19 @@ services:
       # Loglar
       - log_data:/app/logs
     depends_on:
-      - db
-    networks:
-      - bcris_network
-
-  db:
-    image: postgres:15-alpine
-    container_name: bcris_db
-    restart: unless-stopped
-    environment:
-      - POSTGRES_DB=${POSTGRES_DB:-bcris}
-      - POSTGRES_USER=${POSTGRES_USER:-bcris_user}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+      db:
+        condition: service_healthy
     networks:
       - bcris_network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-bcris_user}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      test: ["CMD", "curl", "-f", "http://localhost:8000/admin/login/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
 volumes:
-  db_data:
+  postgres_data:
     driver: local
   media_data:
     driver: local
@@ -62,8 +73,6 @@ volumes:
   static_data:
     driver: local
   log_data:
-    driver: local
-  postgres_data:
     driver: local
 
 networks:

@@ -5,37 +5,27 @@ set -e
 
 echo "🚀 Starting BCRIS..."
 
-# Wait for database
-echo "⏳ Waiting for database..."
-python << END
-import sys
-import time
-import psycopg2
-import os
-
-max_retries = 30
-retry_interval = 2
-
-for i in range(max_retries):
-    try:
-        conn = psycopg2.connect(
-            dbname=os.environ.get('POSTGRES_DB', 'bcris'),
-            user=os.environ.get('POSTGRES_USER', 'bcris_user'),
-            password=os.environ.get('POSTGRES_PASSWORD', ''),
-            host=os.environ.get('POSTGRES_HOST', 'db'),
-            port=os.environ.get('POSTGRES_PORT', '5432')
-        )
-        conn.close()
-        print("✅ Database is ready!")
-        sys.exit(0)
-    except psycopg2.OperationalError:
-        if i < max_retries - 1:
-            print(f"⏳ Database not ready, retrying... ({i+1}/{max_retries})")
-            time.sleep(retry_interval)
-        else:
-            print("❌ Database connection failed!")
-            sys.exit(1)
-END
+# Wait for database (if using PostgreSQL)
+if [ -n "$POSTGRES_HOST" ]; then
+    echo "⏳ Waiting for PostgreSQL at $POSTGRES_HOST:$POSTGRES_PORT..."
+    
+    max_retries=30
+    counter=0
+    
+    until pg_isready -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" -U "$POSTGRES_USER" > /dev/null 2>&1; do
+        counter=$((counter+1))
+        if [ $counter -gt $max_retries ]; then
+            echo "❌ PostgreSQL did not become ready in time"
+            exit 1
+        fi
+        echo "⏳ Waiting for PostgreSQL... ($counter/$max_retries)"
+        sleep 2
+    done
+    
+    echo "✅ PostgreSQL is ready!"
+else
+    echo "ℹ️ Using SQLite database"
+fi
 
 # Run migrations
 echo "📦 Running migrations..."
@@ -44,15 +34,6 @@ python manage.py migrate --noinput
 # Collect static files
 echo "📁 Collecting static files..."
 python manage.py collectstatic --noinput
-
-# Create superuser if not exists (optional)
-# python manage.py shell << END
-# from django.contrib.auth import get_user_model
-# User = get_user_model()
-# if not User.objects.filter(username='admin').exists():
-#     User.objects.create_superuser('admin', 'admin@example.com', 'admin')
-#     print("✅ Superuser created!")
-# END
 
 echo "✅ BCRIS is ready!"
 

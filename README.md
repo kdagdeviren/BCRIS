@@ -113,6 +113,33 @@ Admin Panel → Özellikler → Özellik Ekle/Düzenle
 - Ana sayfa: `static/languages.json`
 - Hekim sayfaları: `static/physician_translations.json`
 
+## 🚀 Deployment
+
+### ⚡ Coolify ile Hızlı Deployment (Önerilen)
+Tek tıkla, 5 dakikada deploy edin:
+- **Hızlı Başlangıç**: [COOLIFY_QUICKSTART.md](COOLIFY_QUICKSTART.md) ⭐
+- Sadece 3 environment variable gerekli
+- Database, volumes, network otomatik yapılandırılır
+
+### 🐳 Docker Compose ile Deployment
+```bash
+# .env dosyası oluştur
+cp .env.example .env
+# .env dosyasını düzenle
+
+# Başlat
+docker-compose up -d
+
+# Logları izle
+docker-compose logs -f
+```
+
+### 📚 Detaylı Rehberler
+- **Coolify Detaylı**: [docs/COOLIFY_DEPLOYMENT.md](docs/COOLIFY_DEPLOYMENT.md)
+- **Docker Detaylı**: [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
+- **Sorun Giderme**: [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)
+- **Hızlı Çözümler**: [QUICK_FIX.md](QUICK_FIX.md)
+
 ## 📚 Dokümantasyon
 
 Detaylı dokümantasyon için `docs/` klasörüne bakın:
@@ -121,6 +148,7 @@ Detaylı dokümantasyon için `docs/` klasörüne bakın:
 - **Django**: [docs/README_DJANGO.md](docs/README_DJANGO.md)
 - **Veritabanı**: [docs/DATABASE_DRIVEN_SYSTEM.md](docs/DATABASE_DRIVEN_SYSTEM.md)
 - **Özellikler**: [docs/TAMAMLANAN_OZELLIKLER_OZET.md](docs/TAMAMLANAN_OZELLIKLER_OZET.md)
+- **Deployment**: [docs/COOLIFY_DEPLOYMENT.md](docs/COOLIFY_DEPLOYMENT.md)
 
 ## 🧪 Test
 

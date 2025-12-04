@@ -42,7 +42,11 @@ RUN mkdir -p /app/media/ml_models \
     /app/staticfiles \
     /app/logs
 
-# Collect static files
+# Copy start script
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
+
+# Collect static files (optional, will be done in start.sh too)
 RUN python manage.py collectstatic --noinput || true
 
 # Create a non-root user
@@ -59,5 +63,5 @@ EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
     CMD curl -f http://localhost:8000/ || exit 1
 
-# Start command
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "4", "--threads", "2", "--timeout", "120", "--access-logfile", "/app/logs/access.log", "--error-logfile", "/app/logs/error.log", "bcris_project.wsgi:application"]
+# Start command - use start.sh
+CMD ["/app/start.sh"]

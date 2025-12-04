@@ -17,12 +17,25 @@ ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost').split(',')
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 if os.environ.get('DATABASE_URL'):
+    # Parse DATABASE_URL
     DATABASES = {
         'default': dj_database_url.config(
             default=os.environ.get('DATABASE_URL'),
             conn_max_age=600,
             conn_health_checks=True,
         )
+    }
+elif os.environ.get('POSTGRES_HOST'):
+    # Manual PostgreSQL configuration (fallback)
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('POSTGRES_DB', 'bcris'),
+            'USER': os.environ.get('POSTGRES_USER', 'bcris_user'),
+            'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
+            'HOST': os.environ.get('POSTGRES_HOST', 'db'),
+            'PORT': os.environ.get('POSTGRES_PORT', '5432'),
+        }
     }
 else:
     # Fallback to SQLite
