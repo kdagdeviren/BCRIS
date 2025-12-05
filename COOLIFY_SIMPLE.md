@@ -13,8 +13,10 @@ BCRIS projesini Coolify'da 3 dakikada deploy edin!
 
 ```env
 DJANGO_SECRET_KEY=your-very-long-random-secret-key
-DJANGO_ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com
+DJANGO_ALLOWED_HOSTS=your-coolify-domain.sslip.io,yourdomain.com,www.yourdomain.com
 ```
+
+**Not**: Coolify'ın otomatik oluşturduğu domain'i (örn: `n0sc8wsk0w4ow08g00wg0kkc.82.25.101.93.sslip.io`) mutlaka ekleyin!
 
 Secret key oluştur:
 ```bash
