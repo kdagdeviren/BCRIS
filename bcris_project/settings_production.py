@@ -12,7 +12,7 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', SECRET_KEY)
 
 # Allowed hosts
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost').split(',')
+ALLOWED_HOSTS = [host.strip() for host in os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost').split(',')]
 
 # Database - SQLite for production
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
