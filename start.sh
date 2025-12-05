@@ -4,7 +4,7 @@
 set -e
 
 # Set Django settings module for production
-export DJANGO_SETTINGS_MODULE=bcris_project.settings_production
+export DJANGO_SETTINGS_MODULE=bcris_project.settings
 
 echo "🚀 Starting BCRIS with SQLite..."
 echo "📝 Using settings: $DJANGO_SETTINGS_MODULE"
