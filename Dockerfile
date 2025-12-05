@@ -45,15 +45,8 @@ RUN mkdir -p /app/media/ml_models \
 COPY start.sh /app/start.sh
 RUN chmod +x /app/start.sh
 
-# Collect static files (optional, will be done in start.sh too)
+# Collect static files as root (will be redone in start.sh)
 RUN python manage.py collectstatic --noinput || true
-
-# Create a non-root user
-RUN useradd -m -u 1000 bcris && \
-    chown -R bcris:bcris /app
-
-# Switch to non-root user
-USER bcris
 
 # Expose port
 EXPOSE 8000
@@ -62,5 +55,5 @@ EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
     CMD curl -f http://localhost:8000/ || exit 1
 
-# Start command - use start.sh
+# Start command - use start.sh (runs as root to handle volume permissions)
 CMD ["/app/start.sh"]
