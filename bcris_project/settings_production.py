@@ -36,17 +36,18 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'  # /app/media
 
-# Security settings
+# Security settings - HTTP için devre dışı
+# SSL sertifikası eklendiğinde bu ayarları açabilirsiniz
+SECURE_SSL_REDIRECT = False  # HTTPS yönlendirmesini kapat
+SESSION_COOKIE_SECURE = False  # HTTP üzerinden cookie'lere izin ver
+CSRF_COOKIE_SECURE = False  # HTTP üzerinden CSRF'e izin ver
+
+# Temel güvenlik ayarları (HTTP ile uyumlu)
 if not DEBUG:
-    SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT', 'True') == 'True'
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
     X_FRAME_OPTIONS = 'DENY'
-    SECURE_HSTS_SECONDS = 31536000
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
+    # HSTS ayarları kaldırıldı - HTTPS olmadan çalışmaz
 
 # Logging
 LOGGING = {
