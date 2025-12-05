@@ -115,30 +115,36 @@ Admin Panel → Özellikler → Özellik Ekle/Düzenle
 
 ## 🚀 Deployment
 
-### ⚡ Coolify ile Hızlı Deployment (Önerilen)
-Tek tıkla, 5 dakikada deploy edin:
-- **Hızlı Başlangıç**: [COOLIFY_QUICKSTART.md](COOLIFY_QUICKSTART.md) ⭐
-- Sadece 3 environment variable gerekli
-- Database, volumes, network otomatik yapılandırılır
+### ⚡ Coolify ile Deployment (Önerilen)
+Dockerfile + SQLite ile 3 dakikada deploy:
+- **Hızlı Başlangıç**: [COOLIFY_SIMPLE.md](COOLIFY_SIMPLE.md) ⭐
+- Sadece 2 environment variable gerekli
+- Veritabanı kurulumu yok (SQLite otomatik)
+- 5 volume ekle, deploy et, bitti!
 
-### 🐳 Docker Compose ile Deployment
+### 🐳 Docker ile Manuel Deployment
 ```bash
-# .env dosyası oluştur
-cp .env.example .env
-# .env dosyasını düzenle
+# Build
+docker build -t bcris .
 
-# Başlat
-docker-compose up -d
-
-# Logları izle
-docker-compose logs -f
+# Run
+docker run -d \
+  -p 8000:8000 \
+  -e DJANGO_SECRET_KEY=your-key \
+  -e DJANGO_ALLOWED_HOSTS=yourdomain.com \
+  -v bcris-data:/app/data \
+  -v bcris-media:/app/media \
+  -v bcris-models:/app/models \
+  -v bcris-static:/app/staticfiles \
+  -v bcris-logs:/app/logs \
+  --name bcris \
+  bcris
 ```
 
 ### 📚 Detaylı Rehberler
-- **Coolify Detaylı**: [docs/COOLIFY_DEPLOYMENT.md](docs/COOLIFY_DEPLOYMENT.md)
-- **Docker Detaylı**: [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
-- **Sorun Giderme**: [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)
-- **Hızlı Çözümler**: [QUICK_FIX.md](QUICK_FIX.md)
+- **Environment Variables**: [.env.example](.env.example)
+- **Dockerfile**: [Dockerfile](Dockerfile)
+- **Start Script**: [start.sh](start.sh)
 
 ## 📚 Dokümantasyon
 

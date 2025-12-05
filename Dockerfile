@@ -19,8 +19,6 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     g++ \
-    libpq-dev \
-    postgresql-client \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
@@ -30,7 +28,7 @@ COPY requirements.txt .
 # Install Python dependencies
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt && \
-    pip install gunicorn psycopg2-binary whitenoise
+    pip install gunicorn whitenoise
 
 # Copy project files
 COPY . .
@@ -40,7 +38,8 @@ RUN mkdir -p /app/media/ml_models \
     /app/media/patient_data \
     /app/media/downloadable_files \
     /app/staticfiles \
-    /app/logs
+    /app/logs \
+    /app/data
 
 # Copy start script
 COPY start.sh /app/start.sh
