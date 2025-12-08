@@ -24,6 +24,12 @@ DEBUG = os.environ.get("DJANGO_DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(",") + ['localhost', '127.0.0.1']
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://bcris.site',
+    'https://www.bcris.site',
+    'http://bcris.site',
+    'http://www.bcris.site',
+]
 
 # Application definition
 
