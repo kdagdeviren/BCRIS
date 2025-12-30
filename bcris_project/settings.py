@@ -12,13 +12,23 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url
-from dotenv import load_dotenv
+
+try:
+    import dj_database_url
+except ImportError:
+    dj_database_url = None
+
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    load_dotenv = None
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv(os.path.join(BASE_DIR, ".env"))
 
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")  # .env.example ile uyumlu
+if load_dotenv:
+    load_dotenv(os.path.join(BASE_DIR, ".env"))
+
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-secret-key-change-in-production")  # .env.example ile uyumlu
 
 DEBUG = os.environ.get("DJANGO_DEBUG", "False") == "True"
 
