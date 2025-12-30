@@ -386,3 +386,54 @@ class DownloadableFile(models.Model):
         if self.file:
             return round(self.file.size / (1024 * 1024), 2)
         return 0
+
+
+class ThanksPageContributor(models.Model):
+    """Teşekkür sayfasında gösterilecek katkıda bulunanlar (manuel ekleme)"""
+    full_name = models.CharField(max_length=200, verbose_name="Ad Soyad")
+    title = models.CharField(max_length=100, verbose_name="Ünvan", blank=True, help_text="Örn: Prof. Dr., Doç. Dr., Uzm. Dr.")
+    institution = models.CharField(max_length=200, verbose_name="Kurum/Hastane")
+    department = models.CharField(max_length=100, verbose_name="Bölüm", blank=True)
+    contribution_type = models.CharField(max_length=100, verbose_name="Katkı Türü", blank=True, help_text="Örn: Veri Katkısı, Danışmanlık")
+    data_count = models.IntegerField(default=0, verbose_name="Veri Seti Sayısı")
+    patient_count = models.IntegerField(default=0, verbose_name="Hasta Sayısı")
+    order = models.IntegerField(default=0, verbose_name="Sıra", help_text="Küçük sayılar önce gösterilir")
+    is_active = models.BooleanField(default=True, verbose_name="Aktif")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Eklenme Tarihi")
+    
+    class Meta:
+        verbose_name = "Teşekkür Sayfası Katkıcısı"
+        verbose_name_plural = "Teşekkür Sayfası Katkıcıları"
+        ordering = ['order', 'full_name']
+    
+    def __str__(self):
+        return f"{self.full_name} - {self.institution}"
+
+
+class ThanksPageSettings(models.Model):
+    """Teşekkür sayfası ayarları"""
+    title_tr = models.CharField(max_length=200, verbose_name="Başlık (TR)", default="🙏 Teşekkürler")
+    title_en = models.CharField(max_length=200, verbose_name="Başlık (EN)", default="🙏 Thanks")
+    subtitle_tr = models.TextField(verbose_name="Alt Başlık (TR)", default="BCRIS projesine veri katkısında bulunan değerli hekimlerimize ve kurumlarına en içten teşekkürlerimizi sunarız.")
+    subtitle_en = models.TextField(verbose_name="Alt Başlık (EN)", default="We extend our sincere thanks to our valued physicians and institutions who contributed data to the BCRIS project.")
+    intro_title_tr = models.CharField(max_length=200, verbose_name="Giriş Başlığı (TR)", default="Projeye Katkılarınız")
+    intro_title_en = models.CharField(max_length=200, verbose_name="Giriş Başlığı (EN)", default="Your Contributions")
+    intro_text_tr = models.TextField(verbose_name="Giriş Metni (TR)", default="Paylaştığınız hasta verileri sayesinde makine öğrenmesi modelimiz sürekli gelişiyor ve daha doğru tahminler yapabiliyor.")
+    intro_text_en = models.TextField(verbose_name="Giriş Metni (EN)", default="Thanks to the patient data you share, our machine learning model continues to improve and make more accurate predictions.")
+    show_stats = models.BooleanField(default=True, verbose_name="İstatistikleri Göster")
+    total_patients_override = models.IntegerField(null=True, blank=True, verbose_name="Toplam Hasta (Manuel)", help_text="Boş bırakılırsa otomatik hesaplanır")
+    model_accuracy_override = models.FloatField(null=True, blank=True, verbose_name="Model Doğruluğu (Manuel %)", help_text="Boş bırakılırsa son eğitimden alınır")
+    
+    class Meta:
+        verbose_name = "Teşekkür Sayfası Ayarı"
+        verbose_name_plural = "Teşekkür Sayfası Ayarları"
+    
+    def __str__(self):
+        return "Teşekkür Sayfası Ayarları"
+    
+    def save(self, *args, **kwargs):
+        # Sadece bir kayıt olmasını sağla
+        if not self.pk and ThanksPageSettings.objects.exists():
+            existing = ThanksPageSettings.objects.first()
+            self.pk = existing.pk
+        super().save(*args, **kwargs)

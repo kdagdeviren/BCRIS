@@ -198,22 +198,30 @@ def physician_uploads_list(request):
 
 
 def thanks_page(request):
-    """Teşekkür sayfası - Veri yollayan hekimleri listele"""
-    # Onaylı ve veri yüklemiş hekimleri al
-    physicians = Physician.objects.filter(
-        approval_status='approved',
-        uploads__processing_status__in=['processed', 'integrated']
-    ).annotate(
-        total_uploads=Count('uploads', filter=Q(uploads__processing_status__in=['processed', 'integrated'])),
-        total_patients=Count('uploads__patient_count')
-    ).filter(total_uploads__gt=0).distinct().order_by('-total_uploads')
+    """Teşekkür sayfası - Admin'den eklenen katkıcıları ve ayarları göster"""
+    from .models import ThanksPageContributor, ThanksPageSettings
+    
+    # Admin'den eklenen katkıcıları al
+    contributors = ThanksPageContributor.objects.filter(is_active=True).order_by('order', 'full_name')
+    
+    # Sayfa ayarlarını al
+    settings = ThanksPageSettings.objects.first()
     
     # ML istatistikleri
     latest_training = MLTrainingLog.objects.order_by('-training_date').first()
     
+    # İstatistik hesaplamaları
+    total_contributors = contributors.count()
+    total_patients = settings.total_patients_override if (settings and settings.total_patients_override) else sum(c.patient_count for c in contributors)
+    model_accuracy = settings.model_accuracy_override if (settings and settings.model_accuracy_override) else (latest_training.accuracy if latest_training else None)
+    
     context = {
-        'physicians': physicians,
+        'contributors': contributors,
+        'settings': settings,
         'latest_training': latest_training,
+        'total_contributors': total_contributors,
+        'total_patients': total_patients,
+        'model_accuracy': model_accuracy,
     }
     
     return render(request, 'thanks.html', context)

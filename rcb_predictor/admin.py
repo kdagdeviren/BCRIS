@@ -5,7 +5,8 @@ from unfold.decorators import display
 from .models import (
     FeatureGroup, Feature, CategoryOption, VariableInfo,
     TreatmentMessage, MLModel, SystemSettings,
-    Physician, PatientDataUpload, MLTrainingLog, DownloadableFile
+    Physician, PatientDataUpload, MLTrainingLog, DownloadableFile,
+    ThanksPageContributor, ThanksPageSettings
 )
 
 
@@ -435,3 +436,51 @@ class DownloadableFileAdmin(ModelAdmin):
         if not change:  # Yeni kayıt
             obj.uploaded_by = request.user
         super().save_model(request, obj, form, change)
+
+
+@admin.register(ThanksPageContributor)
+class ThanksPageContributorAdmin(ModelAdmin):
+    list_display = ['full_name', 'title', 'institution', 'department', 'data_count', 'patient_count', 'order', 'is_active']
+    list_filter = ['is_active', 'institution']
+    list_editable = ['order', 'is_active', 'data_count', 'patient_count']
+    search_fields = ['full_name', 'institution', 'department']
+    ordering = ['order', 'full_name']
+    
+    fieldsets = (
+        ('Kişi Bilgileri', {
+            'fields': ('full_name', 'title', 'institution', 'department')
+        }),
+        ('Katkı Bilgileri', {
+            'fields': ('contribution_type', 'data_count', 'patient_count')
+        }),
+        ('Görünürlük', {
+            'fields': ('order', 'is_active')
+        }),
+    )
+
+
+@admin.register(ThanksPageSettings)
+class ThanksPageSettingsAdmin(ModelAdmin):
+    list_display = ['__str__', 'show_stats']
+    
+    fieldsets = (
+        ('Başlıklar', {
+            'fields': ('title_tr', 'title_en', 'subtitle_tr', 'subtitle_en')
+        }),
+        ('Giriş Metni', {
+            'fields': ('intro_title_tr', 'intro_title_en', 'intro_text_tr', 'intro_text_en')
+        }),
+        ('İstatistikler', {
+            'fields': ('show_stats', 'total_patients_override', 'model_accuracy_override'),
+            'description': 'Manuel değerler girilirse otomatik hesaplama yerine bu değerler kullanılır.'
+        }),
+    )
+    
+    def has_add_permission(self, request):
+        # Sadece bir kayıt olmasını sağla
+        if ThanksPageSettings.objects.exists():
+            return False
+        return super().has_add_permission(request)
+    
+    def has_delete_permission(self, request, obj=None):
+        return False

@@ -1100,7 +1100,7 @@
                     <button class="open-academic-btn" onclick="openAcademicInfo()" style="margin: 0;" id="academicInfoBtn">
                         📚 Teknik Detaylar
                     </button>
-                    <button class="desktop-download-btn" onclick="downloadDesktopApp()" style="margin: 0; background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); display: none;" id="desktopDownloadBtn">
+                    <button class="desktop-download-btn" onclick="downloadDesktopApp()" style="margin: 0; background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);" id="desktopDownloadBtn">
                         💻 <span id="desktopDownloadBtnText">Download for Desktop</span>
                     </button>
                 </div>
@@ -2099,8 +2099,25 @@
         }
 
         // Masaüstü uygulamasını indir
-        function downloadDesktopApp() {
-            window.location.href = '/download_desktop_app/';
+        async function downloadDesktopApp() {
+            try {
+                const response = await fetch('/get_desktop_app_info/');
+                const data = await response.json();
+                
+                if (data.available) {
+                    window.location.href = '/download_desktop_app/';
+                } else {
+                    const lang = currentLanguage || 'tr';
+                    if (lang === 'tr') {
+                        alert('Masaüstü uygulaması henüz yüklenmemiş. Lütfen daha sonra tekrar deneyin.');
+                    } else {
+                        alert('Desktop application is not available yet. Please try again later.');
+                    }
+                }
+            } catch (error) {
+                console.error('Desktop app check error:', error);
+                alert('Bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
+            }
         }
 
         // Masaüstü uygulaması bilgilerini kontrol et ve butonu göster
@@ -2112,13 +2129,12 @@
                 if (data.available) {
                     const btn = document.getElementById('desktopDownloadBtn');
                     if (btn) {
-                        btn.style.display = 'inline-flex';
                         btn.title = `Version: ${data.version} | Size: ${data.size_mb} MB`;
                     }
                     console.log(`✅ Desktop app available: v${data.version} (${data.size_mb} MB)`);
                 }
             } catch (error) {
-                console.log('ℹ️ Desktop app not available');
+                console.log('ℹ️ Desktop app info not available');
             }
         }
 

@@ -297,6 +297,22 @@ UNFOLD = {
                 ],
             },
             {
+                "title": "Teşekkür Sayfası",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Katkıcılar",
+                        "icon": "people",
+                        "link": lambda request: "/admin/rcb_predictor/thankspagecontributor/",
+                    },
+                    {
+                        "title": "Sayfa Ayarları",
+                        "icon": "tune",
+                        "link": lambda request: "/admin/rcb_predictor/thankspagesettings/",
+                    },
+                ],
+            },
+            {
                 "title": "Sistem",
                 "separator": True,
                 "items": [
