@@ -4,6 +4,9 @@ from . import views, views_auth
 app_name = 'rcb_predictor'
 
 urlpatterns = [
+    # Site giriş şifresi
+    path('site-login/', views.site_login, name='site_login'),
+    
     # Ana sayfa ve tahmin (herkese açık)
     path('', views.index, name='index'),
     path('check_model/', views.check_model, name='check_model'),
@@ -14,6 +17,8 @@ urlpatterns = [
     path('import_excel/', views.import_excel, name='import_excel'),
     path('download_sample_excel/', views.download_sample_excel, name='download_sample_excel'),
     path('download_variable_format/', views.download_variable_format, name='download_variable_format'),
+    path('download_desktop_app/', views.download_desktop_app, name='download_desktop_app'),
+    path('get_desktop_app_info/', views.get_desktop_app_info, name='get_desktop_app_info'),
     
     # Admin mesajları
     path('admin/messages/', views.admin_messages_page, name='admin_messages'),

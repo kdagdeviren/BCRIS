@@ -780,6 +780,22 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
         }
+        .desktop-download-btn {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+        .desktop-download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+        }
         /* PCR Hesaplayıcı stilleri */
         #pcrCalculatorContent .pcr-container {
             max-width: 1200px;
@@ -1075,18 +1091,6 @@
                     📋 Değişken Formatı Bilgi Dosyası İndir
                 </button>
                 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <button class="optimal-btn rcb0" id="rcb0Btn" onclick="loadOptimalFeatures(0)" style="margin: 0;">
-                        🎯 RCB-0 (pCR) Optimal
-                    </button>
-                    <button class="optimal-btn rcb1" id="rcb1Btn" onclick="loadOptimalFeatures(1)" style="margin: 0;">
-                        🎯 RCB-1 Optimal
-                    </button>
-                    <button class="optimal-btn rcb2" id="rcb2Btn" onclick="loadOptimalFeatures(2)" style="margin: 0;">
-                        🎯 RCB-2 Optimal
-                    </button>
-                    <button class="optimal-btn rcb3" id="rcb3Btn" onclick="loadOptimalFeatures(3)" style="margin: 0;">
-                        🎯 RCB-3 Optimal
-                    </button>
                     <button class="open-new-page-btn" onclick="openNewPage()" style="margin: 0;">
                         🧬 PCR Hesaplayıcı
                     </button>
@@ -1095,6 +1099,9 @@
                     </button>
                     <button class="open-academic-btn" onclick="openAcademicInfo()" style="margin: 0;" id="academicInfoBtn">
                         📚 Teknik Detaylar
+                    </button>
+                    <button class="desktop-download-btn" onclick="downloadDesktopApp()" style="margin: 0; background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); display: none;" id="desktopDownloadBtn">
+                        💻 <span id="desktopDownloadBtnText">Download for Desktop</span>
                     </button>
                 </div>
             </div>
@@ -1360,18 +1367,6 @@
             if (document.getElementById('downloadVariableFormatBtn')) {
                 document.getElementById('downloadVariableFormatBtn').textContent = t.download_variable_format;
             }
-            if (document.getElementById('rcb0Btn')) {
-                document.getElementById('rcb0Btn').textContent = t.rcb0_optimal;
-            }
-            if (document.getElementById('rcb1Btn')) {
-                document.getElementById('rcb1Btn').textContent = t.rcb1_optimal;
-            }
-            if (document.getElementById('rcb2Btn')) {
-                document.getElementById('rcb2Btn').textContent = t.rcb2_optimal;
-            }
-            if (document.getElementById('rcb3Btn')) {
-                document.getElementById('rcb3Btn').textContent = t.rcb3_optimal;
-            }
             if (document.getElementById('predictBtn')) {
                 document.getElementById('predictBtn').textContent = t.predict_button;
             }
@@ -1575,13 +1570,7 @@
         function showThesisInfo() {
             console.log('🔔 showThesisInfo çağrıldı');
             
-            // Kullanıcı daha önce okudu mu kontrol et
-            const hasRead = localStorage.getItem('thesisInfoRead');
-            if (hasRead === 'true') {
-                console.log('ℹ️ Kullanıcı tez bilgilendirmesini daha önce okudu, modal gösterilmiyor');
-                return;
-            }
-            
+            // Her girişte göster - localStorage kontrolü kaldırıldı
             const modal = document.getElementById('thesisInfoModal');
             console.log('🔔 Modal elementi:', modal);
             if (modal) {
@@ -1652,16 +1641,13 @@
             if (modal) {
                 modal.style.display = 'none';
                 document.body.style.overflow = 'auto'; // Sayfa kaydırmayı tekrar etkinleştir
-                // Kullanıcının modalı okuduğunu localStorage'a kaydet
-                localStorage.setItem('thesisInfoRead', 'true');
-                console.log('✅ Tez bilgilendirme okundu olarak işaretlendi');
+                console.log('✅ Tez bilgilendirme kapatıldı');
             }
         }
         
-        // Test için: Tez bilgilendirmesini sıfırla (console'dan çağrılabilir)
+        // Test için: Tez bilgilendirmesini sıfırla (artık gerekli değil ama uyumluluk için bırakıldı)
         function resetThesisInfo() {
-            localStorage.removeItem('thesisInfoRead');
-            console.log('🔄 Tez bilgilendirme sıfırlandı. Sayfayı yenileyin.');
+            console.log('ℹ️ Tez bilgilendirme artık her girişte gösteriliyor.');
         }
         
         // Değişken bilgi modal fonksiyonları
@@ -1839,6 +1825,9 @@
             loadVariableInfo();
             updateDropdownOptions(currentLanguage);
             
+            // Desktop app kontrolü
+            checkDesktopAppAvailability();
+            
             // Dil dosyasını yükle
             loadTranslations().then(() => {
                 // Dil uygula
@@ -1886,12 +1875,7 @@
                 console.log('📄 window.onload çalıştı');
                 setTimeout(() => {
                     // Kullanıcı daha önce okudu mu kontrol et
-                    const hasRead = localStorage.getItem('thesisInfoRead');
-                    if (hasRead === 'true') {
-                        console.log('ℹ️ Kullanıcı tez bilgilendirmesini daha önce okudu (window.onload)');
-                        return;
-                    }
-                    
+                    // Her girişte modal göster - localStorage kontrolü kaldırıldı
                     const modal = document.getElementById('thesisInfoModal');
                     if (modal && modal.style.display === 'none') {
                         console.log('⚠️ Modal hala gizli, tekrar gösteriliyor...');
@@ -2112,6 +2096,30 @@
         function downloadVariableFormat() {
             const lang = currentLanguage || 'tr';
             window.location.href = `/download_variable_format?lang=${lang}`;
+        }
+
+        // Masaüstü uygulamasını indir
+        function downloadDesktopApp() {
+            window.location.href = '/download_desktop_app/';
+        }
+
+        // Masaüstü uygulaması bilgilerini kontrol et ve butonu göster
+        async function checkDesktopAppAvailability() {
+            try {
+                const response = await fetch('/get_desktop_app_info/');
+                const data = await response.json();
+                
+                if (data.available) {
+                    const btn = document.getElementById('desktopDownloadBtn');
+                    if (btn) {
+                        btn.style.display = 'inline-flex';
+                        btn.title = `Version: ${data.version} | Size: ${data.size_mb} MB`;
+                    }
+                    console.log(`✅ Desktop app available: v${data.version} (${data.size_mb} MB)`);
+                }
+            } catch (error) {
+                console.log('ℹ️ Desktop app not available');
+            }
         }
 
         function loadExcelFeatures() {

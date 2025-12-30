@@ -1,0 +1,29 @@
+# Generated migration for desktop app support
+
+from django.db import migrations, models
+from django.core.validators import FileExtensionValidator
+
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('rcb_predictor', '0001_initial'),
+    ]
+
+    operations = [
+        migrations.AddField(
+            model_name='downloadablefile',
+            name='version',
+            field=models.CharField(blank=True, help_text='Örn: 1.0.0', max_length=20, verbose_name='Versiyon'),
+        ),
+        migrations.AlterField(
+            model_name='downloadablefile',
+            name='file',
+            field=models.FileField(upload_to='downloadable_files/', validators=[FileExtensionValidator(allowed_extensions=['xlsx', 'xls', 'pdf', 'docx', 'doc', 'txt', 'exe', 'zip', 'msi'])], verbose_name='Dosya'),
+        ),
+        migrations.AlterField(
+            model_name='downloadablefile',
+            name='file_type',
+            field=models.CharField(choices=[('sample_excel', 'Örnek Excel Dosyası'), ('variable_format', 'Değişken Formatı Bilgi Dosyası'), ('desktop_app', 'Masaüstü Uygulaması (Desktop App)')], max_length=50, unique=True, verbose_name='Dosya Tipi'),
+        ),
+    ]

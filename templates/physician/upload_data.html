@@ -18,13 +18,8 @@
             padding: 20px 40px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        .header h1 {
-            font-size: 1.8em;
-            margin-bottom: 5px;
-        }
-        .header p {
-            opacity: 0.9;
-        }
+        .header h1 { font-size: 1.8em; margin-bottom: 5px; }
+        .header p { opacity: 0.9; }
         .container {
             max-width: 900px;
             margin: 40px auto;
@@ -50,7 +45,6 @@
             margin-bottom: 10px;
             color: #333;
             font-weight: 600;
-            font-size: 1em;
         }
         .form-group input[type="file"],
         .form-group textarea {
@@ -74,23 +68,6 @@
             margin-top: 8px;
             display: block;
         }
-        .info-box {
-            background: #e7f3ff;
-            border-left: 4px solid #17a2b8;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-        }
-        .info-box h3 {
-            color: #0c5460;
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-        .info-box ul {
-            margin-left: 20px;
-            color: #0c5460;
-            line-height: 1.8;
-        }
         .btn {
             padding: 15px 30px;
             border-radius: 10px;
@@ -111,6 +88,12 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
         }
+        .btn-primary:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
         .btn-secondary {
             background: white;
             color: #667eea;
@@ -121,76 +104,212 @@
             background: #667eea;
             color: white;
         }
-        .previous-uploads {
-            margin-top: 30px;
-        }
-        .previous-uploads h3 {
-            color: #2c5f7c;
-            margin-bottom: 15px;
-            font-size: 1.2em;
-        }
-        .upload-item {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .upload-item-info {
-            flex: 1;
-        }
-        .upload-item-info strong {
-            display: block;
-            color: #333;
-            margin-bottom: 5px;
-        }
-        .upload-item-info small {
-            color: #666;
-        }
-        .status-badge {
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 600;
-        }
-        .status-pending {
-            background: #fff3cd;
-            color: #856404;
-        }
-        .status-reviewing {
-            background: #cfe2ff;
-            color: #084298;
-        }
-        .status-processed {
-            background: #d1e7dd;
-            color: #0f5132;
-        }
-        .messages {
-            margin-bottom: 20px;
-        }
+        .messages { margin-bottom: 20px; }
         .alert {
             padding: 15px 20px;
             border-radius: 10px;
             margin-bottom: 15px;
             font-size: 0.95em;
         }
-        .alert-success {
-            background: #d1e7dd;
-            color: #0f5132;
-            border: 1px solid #badbcc;
+        .alert-success { background: #d1e7dd; color: #0f5132; border: 1px solid #badbcc; }
+        .alert-error { background: #f8d7da; color: #842029; border: 1px solid #f5c2c7; }
+        .alert-warning { background: #fff3cd; color: #856404; border: 1px solid #ffeaa7; }
+        /* Modal Styles */
+        .consent-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease-in;
         }
-        .alert-error {
-            background: #f8d7da;
-            color: #842029;
-            border: 1px solid #f5c2c7;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-        .alert-warning {
+        .consent-content {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+            max-width: 900px;
+            width: 95%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .consent-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 30px;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        .consent-body {
+            padding: 30px;
+            overflow-y: auto;
+            flex: 1;
+            line-height: 1.8;
+            color: #333;
+            font-size: 0.95em;
+        }
+        .consent-body h3 {
+            color: #667eea;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 8px;
+        }
+        .consent-body h3:first-child { margin-top: 0; }
+        .consent-body p { margin-bottom: 12px; }
+        .consent-body ul, .consent-body ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+        .consent-body li { margin-bottom: 8px; }
+        .consent-body a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        .consent-body a:hover { text-decoration: underline; }
+        .warning-box {
             background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
             color: #856404;
-            border: 1px solid #ffeaa7;
         }
+        .critical-box {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            color: #842029;
+        }
+        .info-box-modal {
+            background: #e7f3ff;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            color: #0c5460;
+        }
+        .consent-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+        .consent-table th, .consent-table td {
+            border: 1px solid #ddd;
+            padding: 10px 12px;
+            text-align: left;
+        }
+        .consent-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+        .consent-footer {
+            padding: 25px 30px;
+            background: #f8f9fa;
+            border-top: 2px solid #e0e0e0;
+        }
+        .checkbox-group {
+            margin-bottom: 15px;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+        .checkbox-item:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 12px;
+            margin-top: 3px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .checkbox-item label {
+            cursor: pointer;
+            color: #333;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        .consent-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .btn-consent {
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        .btn-accept {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+        }
+        .btn-accept:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.4);
+        }
+        .btn-accept:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .btn-cancel {
+            background: white;
+            color: #666;
+            border: 2px solid #ddd;
+        }
+        .btn-cancel:hover {
+            background: #f8f9fa;
+            border-color: #999;
+        }
+        .lang-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .lang-tab {
+            padding: 8px 20px;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            background: white;
+            color: #667eea;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .lang-tab.active {
+            background: #667eea;
+            color: white;
+        }
+        .lang-content { display: none; }
+        .lang-content.active { display: block; }
     </style>
 </head>
 <body>
@@ -198,14 +317,11 @@
         <h1>📤 Hasta Verisi Yükle</h1>
         <p>Excel dosyası yükleyerek makine öğrenmesi modeline katkıda bulunun</p>
     </div>
-    
     <div class="container">
         {% if messages %}
         <div class="messages">
             {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">
-                {{ message }}
-            </div>
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
             {% endfor %}
         </div>
         {% endif %}
@@ -213,29 +329,16 @@
         <div class="card">
             <h2>Yeni Veri Seti Yükle</h2>
             
-            <div class="info-box">
-                <h3>📋 Veri Formatı Hakkında</h3>
-                <ul>
-                    <li>Excel dosyası (.xlsx, .xls) veya CSV formatında olmalıdır</li>
-                    <li>Her satır bir hastayı temsil etmelidir</li>
-                    <li>Sütunlar sistem değişkenlerine (i1, i2, i3, vb.) uygun olmalıdır</li>
-                    <li>Hasta kimlik bilgileri içermemelidir (KVKK)</li>
-                    <li>Yüklenen veriler admin onayı sonrası sisteme eklenecektir</li>
-                </ul>
-            </div>
-            
-            <form method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data" id="uploadForm">
                 {% csrf_token %}
                 
                 <div class="form-group">
                     <label for="{{ form.excel_file.id_for_label }}">{{ form.excel_file.label }}</label>
                     {{ form.excel_file }}
-                    <span class="helptext">{{ form.excel_file.help_text }}</span>
+                    <span class="helptext">Excel (.xlsx, .xls) veya CSV formatında dosya yükleyin</span>
                     {% if form.excel_file.errors %}
                         <div style="color: #e53e3e; margin-top: 5px;">
-                            {% for error in form.excel_file.errors %}
-                                {{ error }}
-                            {% endfor %}
+                            {% for error in form.excel_file.errors %}{{ error }}{% endfor %}
                         </div>
                     {% endif %}
                 </div>
@@ -244,38 +347,262 @@
                     <label for="{{ form.description.id_for_label }}">{{ form.description.label }}</label>
                     {{ form.description }}
                     <span class="helptext">Veri seti hakkında notlar ekleyebilirsiniz (opsiyonel)</span>
-                    {% if form.description.errors %}
-                        <div style="color: #e53e3e; margin-top: 5px;">
-                            {% for error in form.description.errors %}
-                                {{ error }}
-                            {% endfor %}
-                        </div>
-                    {% endif %}
                 </div>
                 
                 <div>
-                    <button type="submit" class="btn btn-primary">📤 Yükle</button>
+                    <button type="button" class="btn btn-primary" id="uploadBtn" onclick="showConsentModal()">📤 Dosya Yükle</button>
                     <a href="{% url 'rcb_predictor:physician_dashboard' %}" class="btn btn-secondary">← Geri Dön</a>
                 </div>
             </form>
-            
-            {% if previous_uploads %}
-            <div class="previous-uploads">
-                <h3>Son Yüklemeleriniz</h3>
-                {% for upload in previous_uploads %}
-                <div class="upload-item">
-                    <div class="upload-item-info">
-                        <strong>{{ upload.original_filename }}</strong>
-                        <small>{{ upload.uploaded_at|date:"d.m.Y H:i" }} - {{ upload.patient_count }} hasta</small>
-                    </div>
-                    <span class="status-badge status-{{ upload.processing_status }}">
-                        {{ upload.get_processing_status_display }}
-                    </span>
-                </div>
-                {% endfor %}
-            </div>
-            {% endif %}
         </div>
     </div>
+
+    <!-- Consent Modal -->
+    <div class="consent-modal" id="consentModal" style="display: none;">
+        <div class="consent-content">
+            <div class="consent-header">
+                📋 Veri Paylaşım Sözleşmesi ve Onay Beyanı
+            </div>
+            <div class="consent-body">
+                <div class="lang-tabs">
+                    <button class="lang-tab active" onclick="switchLang('tr')">🇹🇷 Türkçe</button>
+                    <button class="lang-tab" onclick="switchLang('en')">🇬🇧 English</button>
+                </div>
+                
+                <!-- Turkish Content -->
+                <div class="lang-content active" id="content-tr">
+                    <h3>1. AMAÇ VE KAPSAM</h3>
+                    <p>Paylaştığınız hasta verileri, makine öğrenmesi tabanlı Rezidüel Kanser Yükü (RCB) tahmin modelimizin eğitim veri setine entegre edilecektir. Artan örneklem büyüklüğü, modelin prediktif doğruluğunu ve genellenebilirliğini artırarak klinik karar destek sistemimizin performansını optimize edecektir.</p>
+                    
+                    <h3>2. VERİ KULLANIM POLİTİKASI</h3>
+                    <p>Paylaşılan veriler yalnızca akademik araştırma amaçlı kullanılacak olup, herhangi bir üçüncü taraf kurum, kuruluş veya şahısla paylaşılmayacaktır. Veriler, ticari amaçlarla kullanılmayacak ve yalnızca bilimsel yayınlarda anonimleştirilmiş istatistiksel analizler şeklinde raporlanacaktır.</p>
+                    
+                    <h3>3. ETİK VE YASAL UYUMLULUK</h3>
+                    <p><strong>3.1. Kurumsal Onay Gerekliliği:</strong> Veri yüklemesi gerçekleştirmeden önce, ilgili hastaların verilerinin araştırma amaçlı kullanımına ilişkin kurumsal etik kurul onayı ve/veya aydınlatılmış onam süreçlerinin tamamlanmış olduğunu beyan etmeniz gerekmektedir.</p>
+                    <p><strong>3.2. Kişisel Verilerin Korunması:</strong> Paylaşılan veri setleri, 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) ve Avrupa Birliği Genel Veri Koruma Tüzüğü (GDPR) hükümlerine uygun olarak işlenecektir.</p>
+                    
+                    <div class="critical-box">
+                        <strong>3.3. Anonimizasyon Zorunluluğu - KRİTİK:</strong> Gönderilen veri setlerinde hasta kimliğini doğrudan veya dolaylı olarak tanımlayabilecek hiçbir bilgi (ad, soyad, T.C. kimlik numarası, protokol numarası, doğum tarihi, adres, telefon vb.) bulunmamalıdır.
+                    </div>
+                    <h3>4. TEKNİK GEREKSİNİMLER</h3>
+                    <p><strong>4.1. Dosya Formatı:</strong> Veri setleri Microsoft Excel (.xlsx) veya Comma-Separated Values (.csv) formatlarında yüklenebilir. UTF-8 karakter kodlaması önerilmektedir.</p>
+                    <p><strong>4.2. Değişken Yapısı:</strong> Veri setinizi hazırlarken, sitemizde bulunan "Değişken Formatı" butonundan indirilebilen şablon dosyasını referans alınız.</p>
+                    <p><strong>4.3. RCB Hesaplaması Zorunluluğu:</strong> Dahil edilecek hastaların neoadjuvan kemoterapi (NAK) süreci tamamlanmış olmalı ve cerrahi sonrası patolojik değerlendirmeye dayalı RCB skoru, MD Anderson Cancer Center'ın resmi hesaplama aracı kullanılarak belirlenmiş olmalıdır:</p>
+                    <p>🔗 <a href="https://www3.mdanderson.org/app/medcalc/index.cfm?pagename=jsconvert3" target="_blank">RCB Hesaplayıcı</a></p>
+                    <p><strong>4.4. Zorunlu Değişkenler:</strong></p>
+                    <ul>
+                        <li>RCB Skoru (sürekli değişken, 0.00 - 3.28+)</li>
+                        <li>RCB Kategorisi (kategorik: RCB-0, RCB-I, RCB-II, RCB-III)</li>
+                    </ul>
+                    
+                    <h3>5. VERİ KALİTESİ KRİTERLERİ</h3>
+                    <p><strong>5.1. Eksik Veri Yönetimi:</strong> Veri setinizde eksik değer oranının %15'in altında tutulması model performansı açısından kritik önem taşımaktadır.</p>
+                    <p><strong>5.2. Veri Doğrulama:</strong> Gönderilen veriler, sistem yöneticileri tarafından kalite kontrolüne tabi tutulacaktır.</p>
+                    
+                    <div class="critical-box">
+                        <h3 style="margin-top: 0; color: #842029;">6. ⚠️ KRİTİK UYARI: TEMPORAL REFERANS NOKTASI</h3>
+                        <p>Veri setinizdeki tüm değişkenler, hastanın neoadjuvan kemoterapiye başlamadan <strong>ÖNCEKİ</strong> durumunu yansıtmalıdır:</p>
+                        <table class="consent-table">
+                            <tr><th>Değişken Grubu</th><th>Temporal Referans Noktası</th></tr>
+                            <tr><td>Patoloji</td><td>NAK öncesi tanısal biyopsi/eksizyon bulguları</td></tr>
+                            <tr><td>Onkoloji</td><td>Tanı sonrası, NAK öncesi klinik evreleme</td></tr>
+                            <tr><td>Radyoloji</td><td>NAK öncesi son mamografi/USG/MRG bulguları</td></tr>
+                            <tr><td>PET/CT</td><td>NAK öncesi bazal metabolik değerlendirme</td></tr>
+                            <tr><td>Demografik</td><td>NAK başlangıç tarihindeki değerler</td></tr>
+                            <tr><td>Laboratuvar</td><td>NAK öncesi bazal biyokimyasal değerler</td></tr>
+                        </table>
+                        <p><strong>Tedavi ortası (interim) veya tedavi sonrası (post-NAK) değerler kabul edilmemektedir.</strong></p>
+                    </div>
+                    
+                    <h3>7. GÖNÜLLÜLÜK VE GERİ ÇEKİLME HAKKI</h3>
+                    <p>Veri paylaşımı tamamen gönüllülük esasına dayalıdır. Paylaştığınız verilerin veri havuzundan çıkarılmasını istediğiniz takdirde, talebinizi iletebilirsiniz. Talep tarihinden itibaren 30 iş günü içinde verileriniz sistemden kalıcı olarak silinecektir.</p>
+                    <h3>8. YAYIN VE ATIF POLİTİKASI</h3>
+                    <p><strong>8.1. Veri Katkısının Tanınması:</strong> Paylaşılan verilerle gerçekleştirilen bilimsel çalışmalarda, veri katkısı sağlayan kurumlar ve araştırmacılar Teşekkür bölümünde belirtilecek veya katkı düzeyine bağlı olarak ortak yazarlık teklif edilebilecektir.</p>
+                    
+                    <div class="warning-box">
+                        <strong>8.2. Sistem Kullanımında Atıf Zorunluluğu - ÖNEMLİ:</strong>
+                        <p>BCRIS platformunda sunulan makine öğrenmesi modelini, RCB tahmin algoritmalarını veya sistemden elde edilen sonuçları akademik yayınlarınızda kullanmanız halinde, aşağıdaki şekilde atıf yapılması zorunludur:</p>
+                        <p style="background: white; padding: 10px; border-radius: 5px; margin-top: 10px; font-style: italic;">
+                            Dağdeviren, K. (2025). BCRIS: Breast Cancer RCB Intelligence System - Meme Kanserinde Neoadjuvan Kemoterapi Yanıtının Makine Öğrenmesi ile Tahmini [Web tabanlı klinik karar destek sistemi]. https://www.bcris.site
+                        </p>
+                    </div>
+                    
+                    <h3>9. VERİ GÜVENLİĞİ</h3>
+                    <ul>
+                        <li>Tüm veri transferleri SSL/TLS şifreleme protokolleri ile korunmaktadır.</li>
+                        <li>Veriler, güvenli sunucularda şifrelenmiş formatta saklanmaktadır.</li>
+                        <li>Veri erişimi yalnızca yetkili araştırma ekibi ile sınırlıdır.</li>
+                        <li>Düzenli güvenlik denetimleri gerçekleştirilmektedir.</li>
+                    </ul>
+                    
+                    <h3>10. İLETİŞİM VE DESTEK</h3>
+                    <p>Veri paylaşımı, teknik sorunlar veya genel sorularınız için:</p>
+                    <p>📧 E-posta: <a href="mailto:dagdeviren.kagan@gmail.com">dagdeviren.kagan@gmail.com</a></p>
+                </div>
+                
+                <!-- English Content -->
+                <div class="lang-content" id="content-en">
+                    <h3>1. PURPOSE AND SCOPE</h3>
+                    <p>The patient data you share will be integrated into the training dataset of our machine learning-based Residual Cancer Burden (RCB) prediction model. The increased sample size will enhance the predictive accuracy and generalizability of the model, thereby optimizing the performance of our clinical decision support system.</p>
+                    
+                    <h3>2. DATA USE POLICY</h3>
+                    <p>Shared data will be used exclusively for academic research purposes and will not be disclosed to any third-party institutions, organizations, or individuals. The data will not be used for commercial purposes and will only be reported as anonymized statistical analyses in scientific publications.</p>
+                    
+                    <h3>3. ETHICAL AND LEGAL COMPLIANCE</h3>
+                    <p><strong>3.1. Institutional Approval Requirement:</strong> Prior to uploading data, you must confirm that institutional ethics committee approval and/or informed consent processes for the research use of the relevant patients' data have been completed.</p>
+                    <p><strong>3.2. Personal Data Protection:</strong> Shared datasets will be processed in accordance with the provisions of the Turkish Personal Data Protection Law (KVKK) and the European Union General Data Protection Regulation (GDPR).</p>
+                    
+                    <div class="critical-box">
+                        <strong>3.3. Anonymization Requirement - CRITICAL:</strong> Submitted datasets must not contain any information that could directly or indirectly identify patient identity (name, surname, national identification number, protocol number, date of birth, address, phone number, etc.).
+                    </div>
+                    <h3>4. TECHNICAL REQUIREMENTS</h3>
+                    <p><strong>4.1. File Format:</strong> Datasets can be uploaded in Microsoft Excel (.xlsx) or Comma-Separated Values (.csv) formats. UTF-8 character encoding is recommended.</p>
+                    <p><strong>4.2. Variable Structure:</strong> When preparing your dataset, please refer to the template file available for download via the "Variable Format" button on our website.</p>
+                    <p><strong>4.3. RCB Calculation Requirement:</strong> Patients to be included must have completed their neoadjuvant chemotherapy (NAC) course, and the RCB score must have been calculated using the official MD Anderson Cancer Center calculation tool:</p>
+                    <p>🔗 <a href="https://www3.mdanderson.org/app/medcalc/index.cfm?pagename=jsconvert3" target="_blank">RCB Calculator</a></p>
+                    <p><strong>4.4. Mandatory Variables:</strong></p>
+                    <ul>
+                        <li>RCB Score (continuous variable, 0.00 - 3.28+)</li>
+                        <li>RCB Category (categorical: RCB-0, RCB-I, RCB-II, RCB-III)</li>
+                    </ul>
+                    
+                    <h3>5. DATA QUALITY CRITERIA</h3>
+                    <p><strong>5.1. Missing Data Management:</strong> Maintaining a missing value rate below 15% in your dataset is critically important for model performance.</p>
+                    <p><strong>5.2. Data Validation:</strong> Submitted data will be subject to quality control by system administrators.</p>
+                    
+                    <div class="critical-box">
+                        <h3 style="margin-top: 0; color: #842029;">6. ⚠️ CRITICAL WARNING: TEMPORAL REFERENCE POINT</h3>
+                        <p>All variables in your dataset must reflect the patient's status <strong>BEFORE</strong> initiating neoadjuvant chemotherapy:</p>
+                        <table class="consent-table">
+                            <tr><th>Variable Group</th><th>Temporal Reference Point</th></tr>
+                            <tr><td>Pathology</td><td>Pre-NAC diagnostic biopsy/excision findings</td></tr>
+                            <tr><td>Oncology</td><td>Post-diagnosis, pre-NAC clinical staging</td></tr>
+                            <tr><td>Radiology</td><td>Last mammography/USG/MRI findings before NAC</td></tr>
+                            <tr><td>PET/CT</td><td>Pre-NAC baseline metabolic assessment</td></tr>
+                            <tr><td>Demographics</td><td>Values at NAC initiation date</td></tr>
+                            <tr><td>Laboratory</td><td>Pre-NAC baseline biochemical values</td></tr>
+                        </table>
+                        <p><strong>Interim (mid-treatment) or post-NAC values are not accepted.</strong></p>
+                    </div>
+                    
+                    <h3>7. VOLUNTARY PARTICIPATION AND RIGHT TO WITHDRAWAL</h3>
+                    <p>Data sharing is entirely based on voluntary participation. If you wish to have your shared data removed from the data repository, you may submit your request. Your data will be permanently deleted from the system within 30 business days from the date of request.</p>
+                    
+                    <h3>8. PUBLICATION AND CITATION POLICY</h3>
+                    <p><strong>8.1. Recognition of Data Contribution:</strong> In scientific studies conducted with shared data, institutions and researchers who have contributed data will be acknowledged or offered co-authorship depending on the level of contribution.</p>
+                    
+                    <div class="warning-box">
+                        <strong>8.2. Mandatory Citation for System Use - IMPORTANT:</strong>
+                        <p>If you use the machine learning model offered on the BCRIS platform in your academic publications, citation in the following format is mandatory:</p>
+                        <p style="background: white; padding: 10px; border-radius: 5px; margin-top: 10px; font-style: italic;">
+                            Dağdeviren, K. (2025). BCRIS: Breast Cancer RCB Intelligence System - Machine learning-based prediction of neoadjuvant chemotherapy response in breast cancer [Web-based clinical decision support system]. https://www.bcris.site
+                        </p>
+                    </div>
+                    
+                    <h3>9. DATA SECURITY</h3>
+                    <ul>
+                        <li>All data transfers are protected by SSL/TLS encryption protocols.</li>
+                        <li>Data is stored in encrypted format on secure servers.</li>
+                        <li>Data access is restricted to authorized research team members only.</li>
+                        <li>Regular security audits are conducted.</li>
+                    </ul>
+                    
+                    <h3>10. CONTACT AND SUPPORT</h3>
+                    <p>For questions regarding data sharing, technical issues, or general inquiries:</p>
+                    <p>📧 Email: <a href="mailto:dagdeviren.kagan@gmail.com">dagdeviren.kagan@gmail.com</a></p>
+                </div>
+            </div>
+            <div class="consent-footer">
+                <h3 style="color: #667eea; margin-bottom: 15px;">✅ ONAY BEYANI / CONSENT DECLARATION</h3>
+                <p style="margin-bottom: 15px; color: #666;">Veri yüklemesi gerçekleştirmeden önce aşağıdaki maddeleri onaylamanız gerekmektedir:</p>
+                
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="consent1" onchange="checkAllConsents()">
+                        <label for="consent1">Paylaşacağım veriler için kurumsal etik onay/izin süreçleri tamamlanmıştır. / Institutional ethics approval processes have been completed.</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="consent2" onchange="checkAllConsents()">
+                        <label for="consent2">Veri setimde hasta kimliğini tanımlayabilecek hiçbir bilgi bulunmamaktadır. / My dataset does not contain any patient-identifying information.</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="consent3" onchange="checkAllConsents()">
+                        <label for="consent3">Tüm değerler, tedavi öncesi (pre-NAK) döneme aittir. / All values pertain to the pre-treatment (pre-NAC) period.</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="consent4" onchange="checkAllConsents()">
+                        <label for="consent4">RCB skoru ve kategorisi MD Anderson hesaplayıcısı ile doğrulanmıştır. / RCB score and category have been verified using the MD Anderson calculator.</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="consent5" onchange="checkAllConsents()">
+                        <label for="consent5">Verilerin akademik amaçlı kullanılmasını kabul ediyorum. / I consent to the use of the data for academic purposes.</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="consent6" onchange="checkAllConsents()">
+                        <label for="consent6">Veri kullanım politikasını okudum ve kabul ediyorum. / I have read and accept the data use policy.</label>
+                    </div>
+                </div>
+                
+                <div class="consent-buttons">
+                    <button class="btn-consent btn-cancel" onclick="closeConsentModal()">İptal / Cancel</button>
+                    <button class="btn-consent btn-accept" id="acceptBtn" disabled onclick="acceptAndUpload()">📤 Onaylıyorum ve Yüklüyorum / Accept & Upload</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showConsentModal() {
+            // Check if file is selected
+            const fileInput = document.querySelector('input[type="file"]');
+            if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
+                alert('Lütfen önce bir dosya seçin. / Please select a file first.');
+                return;
+            }
+            document.getElementById('consentModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            // Reset checkboxes
+            for (let i = 1; i <= 6; i++) {
+                document.getElementById('consent' + i).checked = false;
+            }
+            document.getElementById('acceptBtn').disabled = true;
+        }
+        
+        function closeConsentModal() {
+            document.getElementById('consentModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        function checkAllConsents() {
+            let allChecked = true;
+            for (let i = 1; i <= 6; i++) {
+                if (!document.getElementById('consent' + i).checked) {
+                    allChecked = false;
+                    break;
+                }
+            }
+            document.getElementById('acceptBtn').disabled = !allChecked;
+        }
+        
+        function acceptAndUpload() {
+            closeConsentModal();
+            document.getElementById('uploadForm').submit();
+        }
+        
+        function switchLang(lang) {
+            document.querySelectorAll('.lang-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.lang-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById('content-' + lang).classList.add('active');
+        }
+        
+        // Close modal on outside click
+        document.getElementById('consentModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeConsentModal();
+            }
+        });
+    </script>
 </body>
 </html>

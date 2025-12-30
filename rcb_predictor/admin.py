@@ -187,7 +187,7 @@ class SystemSettingsAdmin(ModelAdmin):
 
 @admin.register(Physician)
 class PhysicianAdmin(ModelAdmin):
-    list_display = ['full_name', 'institution', 'email', 'approval_status', 'created_at', 'upload_count']
+    list_display = ['full_name', 'institution', 'email', 'approval_status', 'created_at', 'upload_count', 'id_card_download']
     list_filter = ['approval_status', 'is_active', 'created_at']
     search_fields = ['full_name', 'email', 'institution']
     readonly_fields = ['created_at', 'updated_at', 'approval_date', 'id_card_preview']
@@ -231,6 +231,15 @@ class PhysicianAdmin(ModelAdmin):
     def upload_count(self, obj):
         return obj.uploads.count()
     
+    @display(description="Kimlik İndir")
+    def id_card_download(self, obj):
+        if obj.id_card_image:
+            return format_html(
+                '<a href="{}" download class="button" style="background: #10b981; color: white; padding: 5px 10px; border-radius: 4px; text-decoration: none; font-size: 11px;">📥 İndir</a>',
+                obj.id_card_image.url
+            )
+        return format_html('<span style="color: #999;">-</span>')
+    
     @display(description="Kimlik Kartı Önizleme")
     def id_card_preview(self, obj):
         if obj.id_card_image:
@@ -238,8 +247,12 @@ class PhysicianAdmin(ModelAdmin):
                 '<div style="padding: 15px; background: #fff7ed; border: 2px solid #fb923c; border-radius: 8px;">'
                 '<p style="margin-bottom: 10px; color: #c2410c; font-weight: 600;">⚠️ KVKK Uyarısı: TC kimlik numarası kapatılmış olmalı!</p>'
                 '<img src="{}" style="max-width: 500px; max-height: 300px; border: 2px solid #ddd; border-radius: 8px; display: block; margin-bottom: 10px;" />'
+                '<div style="display: flex; gap: 10px; flex-wrap: wrap;">'
                 '<a href="{}" target="_blank" class="button" style="background: #fb923c; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: 600;">🔍 Tam Boyutta Görüntüle</a>'
+                '<a href="{}" download class="button" style="background: #10b981; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: 600;">📥 Kimlik Kartını İndir</a>'
+                '</div>'
                 '</div>',
+                obj.id_card_image.url,
                 obj.id_card_image.url,
                 obj.id_card_image.url
             )
@@ -352,14 +365,14 @@ class MLTrainingLogAdmin(ModelAdmin):
 
 @admin.register(DownloadableFile)
 class DownloadableFileAdmin(ModelAdmin):
-    list_display = ['file_type_display', 'file_name', 'file_size', 'uploaded_at', 'uploaded_by', 'is_active', 'download_button']
+    list_display = ['file_type_display', 'file_name', 'version', 'file_size', 'uploaded_at', 'uploaded_by', 'is_active', 'download_button']
     list_filter = ['file_type', 'is_active', 'uploaded_at']
-    search_fields = ['description_tr', 'description_en']
+    search_fields = ['description_tr', 'description_en', 'version']
     readonly_fields = ['uploaded_at', 'uploaded_by', 'file_size', 'download_panel']
     
     fieldsets = (
         ('Dosya Bilgileri', {
-            'fields': ('file_type', 'file', 'is_active')
+            'fields': ('file_type', 'file', 'version', 'is_active')
         }),
         ('Açıklamalar', {
             'fields': ('description_tr', 'description_en')
@@ -396,11 +409,13 @@ class DownloadableFileAdmin(ModelAdmin):
     @display(description="Dosya İndirme")
     def download_panel(self, obj):
         if obj.file:
+            version_info = f"<p style='margin: 5px 0;'><strong>Versiyon:</strong> {obj.version}</p>" if obj.version else ""
             return format_html(
                 '''
                 <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; border-left: 4px solid #2196F3;">
                     <p style="margin: 0 0 10px 0; font-weight: bold; color: #1976D2;">📁 Dosya Bilgileri</p>
                     <p style="margin: 5px 0;"><strong>Dosya Adı:</strong> {}</p>
+                    {}
                     <p style="margin: 5px 0;"><strong>Boyut:</strong> {} MB</p>
                     <p style="margin: 10px 0 0 0;">
                         <a href="{}" class="button" style="background-color: #2196F3; color: white; padding: 8px 16px; text-decoration: none; border-radius: 4px; display: inline-block;">
@@ -410,6 +425,7 @@ class DownloadableFileAdmin(ModelAdmin):
                 </div>
                 ''',
                 obj.file.name.split('/')[-1],
+                version_info,
                 obj.get_file_size_mb(),
                 obj.file.url
             )

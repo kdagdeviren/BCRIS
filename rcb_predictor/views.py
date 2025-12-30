@@ -4,7 +4,7 @@
 # Tüm veriler veritabanından çekilir, hard-code yok!
 # =============================================================================
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
@@ -21,6 +21,25 @@ from io import BytesIO
 # Global cache
 _cached_model = None
 _cached_model_id = None
+
+
+def site_login(request):
+    """Site giriş şifresi sayfası"""
+    from .middleware import SitePasswordMiddleware
+    
+    error = None
+    
+    if request.method == 'POST':
+        password = request.POST.get('password', '')
+        
+        if password == SitePasswordMiddleware.SITE_PASSWORD:
+            # Şifre doğru - session'a kaydet
+            request.session['site_authenticated'] = True
+            return redirect('rcb_predictor:index')
+        else:
+            error = 'Şifre hatalı. Lütfen tekrar deneyin.'
+    
+    return render(request, 'site_login.html', {'error': error})
 
 
 def get_active_model():
@@ -568,3 +587,75 @@ def download_variable_format(request):
             'success': False,
             'error': str(e)
         }, status=500)
+
+
+def download_desktop_app(request):
+    """Masaüstü uygulamasını indir"""
+    try:
+        from .models import DownloadableFile
+        
+        # Admin panelden yüklenen desktop app dosyasını kontrol et
+        downloadable_file = DownloadableFile.objects.filter(
+            file_type='desktop_app',
+            is_active=True
+        ).first()
+        
+        if not downloadable_file or not downloadable_file.file:
+            return JsonResponse({
+                'success': False,
+                'error': 'Masaüstü uygulaması henüz yüklenmemiş.'
+            }, status=404)
+        
+        # Dosyayı döndür
+        file_name = downloadable_file.file.name.lower()
+        
+        # Content type belirle
+        if file_name.endswith('.exe'):
+            content_type = 'application/x-msdownload'
+        elif file_name.endswith('.msi'):
+            content_type = 'application/x-msi'
+        elif file_name.endswith('.zip'):
+            content_type = 'application/zip'
+        else:
+            content_type = 'application/octet-stream'
+        
+        response = HttpResponse(downloadable_file.file.read(), content_type=content_type)
+        response['Content-Disposition'] = f'attachment; filename={downloadable_file.file.name.split("/")[-1]}'
+        return response
+        
+    except Exception as e:
+        return JsonResponse({
+            'success': False,
+            'error': str(e)
+        }, status=500)
+
+
+def get_desktop_app_info(request):
+    """Masaüstü uygulaması bilgilerini döndür (versiyon, boyut vb.)"""
+    try:
+        from .models import DownloadableFile
+        
+        downloadable_file = DownloadableFile.objects.filter(
+            file_type='desktop_app',
+            is_active=True
+        ).first()
+        
+        if not downloadable_file or not downloadable_file.file:
+            return JsonResponse({
+                'available': False
+            })
+        
+        return JsonResponse({
+            'available': True,
+            'version': downloadable_file.version or '1.0',
+            'size_mb': downloadable_file.get_file_size_mb(),
+            'filename': downloadable_file.file.name.split('/')[-1],
+            'description_tr': downloadable_file.description_tr,
+            'description_en': downloadable_file.description_en,
+        })
+        
+    except Exception as e:
+        return JsonResponse({
+            'available': False,
+            'error': str(e)
+        })

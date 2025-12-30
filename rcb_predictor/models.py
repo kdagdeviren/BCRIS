@@ -353,18 +353,20 @@ class MLTrainingLog(models.Model):
 
 
 class DownloadableFile(models.Model):
-    """İndirilebilir dosyalar (Örnek Excel, Değişken Formatı vb.)"""
+    """İndirilebilir dosyalar (Örnek Excel, Değişken Formatı, Desktop App vb.)"""
     FILE_TYPES = [
         ('sample_excel', 'Örnek Excel Dosyası'),
         ('variable_format', 'Değişken Formatı Bilgi Dosyası'),
+        ('desktop_app', 'Masaüstü Uygulaması (Desktop App)'),
     ]
     
     file_type = models.CharField(max_length=50, choices=FILE_TYPES, unique=True, verbose_name="Dosya Tipi")
     file = models.FileField(
         upload_to='downloadable_files/',
         verbose_name="Dosya",
-        validators=[FileExtensionValidator(allowed_extensions=['xlsx', 'xls', 'pdf', 'docx', 'doc', 'txt'])]
+        validators=[FileExtensionValidator(allowed_extensions=['xlsx', 'xls', 'pdf', 'docx', 'doc', 'txt', 'exe', 'zip', 'msi'])]
     )
+    version = models.CharField(max_length=20, blank=True, verbose_name="Versiyon", help_text="Örn: 1.0.0")
     description_tr = models.TextField(blank=True, verbose_name="Açıklama (TR)")
     description_en = models.TextField(blank=True, verbose_name="Açıklama (EN)")
     uploaded_at = models.DateTimeField(auto_now=True, verbose_name="Yüklenme Tarihi")
