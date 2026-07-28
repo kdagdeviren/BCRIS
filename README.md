@@ -1,133 +1,110 @@
-# BCRIS - Breast Cancer Response Intelligence System
+# BCRIS — Breast Cancer Response Intelligence System
 
-🧬 **Meme Kanseri Yanıt Değerlendirme Sistemi**
+**A configuration-based, multi-platform clinical decision support system for predicting neoadjuvant chemotherapy response in breast cancer.**
 
-AI destekli, veritabanı tabanlı RCB (Residual Cancer Burden) kategorisi tahmin platformu.
+> Live system: [bcris.site](https://bcris.site) &nbsp;|&nbsp; Licence: MIT &nbsp;|&nbsp; DOI: *(pending)*
 
-## 🚀 Hızlı Başlangıç
+---
 
-### Gereksinimler
+## Overview
+
+BCRIS is an open-access web and offline desktop application that supports clinicians in predicting Residual Cancer Burden (RCB) category after neoadjuvant chemotherapy in breast cancer. It was developed as part of a doctoral research programme at Ege University and is described in a manuscript submitted to *BMJ Health & Care Informatics*.
+
+The system implements a four-layer architecture in which **clinical logic is entirely separated from source code**: all variables, category options, treatment messages, and the active prediction model are managed through a database-driven admin interface without requiring a server restart or code change.
+
+---
+
+## Key Features
+
+- **RCB category prediction** — four-class output (RCB-0/pCR, RCB-1, RCB-2, RCB-3) with probability distribution
+- **Configuration-based architecture** — all clinical content managed via the admin panel, zero hard-coding
+- **Swappable model layer** — new prediction model activated via database record, no restart required
+- **Embedded explainability** — per-variable contextual guide (definition, measurement method, clinical relevance, source)
+- **Priority-coded treatment and recommendation layer** — colour-coded cards (critical/warning/informational) per entered variable profile
+- **Bulk Excel import** — upload a multi-patient spreadsheet for batch prediction
+- **PDF report export** — downloadable A4 patient report
+- **Bilingual interface** — Turkish and English (TR/EN toggle)
+- **Physician portal** — registration, verification, data contribution, and contributor recognition page
+- **Learning health system loop** — controlled five-stage cycle: access → verification → contribution → re-training → recognition
+
+---
+
+## Quick Start
+
+### Requirements
+
 - Python 3.8+
 - Django 5.2+
-- PostgreSQL veya SQLite
+- PostgreSQL or SQLite
 
-### Kurulum
+### Installation
 
 ```bash
-# Bağımlılıkları yükle
 pip install -r requirements.txt
-
-# Veritabanını oluştur
 python manage.py migrate
-
-# Statik dosyaları topla
 python manage.py collectstatic
-
-# Sunucuyu başlat
 python manage.py runserver
 ```
 
-### İlk Kullanım
+### First Use
 
-1. **Admin Kullanıcısı Oluştur**
+1. Create an admin user:
 ```bash
-python manage.py createsuperuser
+   python manage.py createsuperuser
 ```
+2. Home page: http://localhost:8000/
+3. Admin panel: http://localhost:8000/admin/
 
-2. **Ana Sayfa**: http://localhost:8000/
-3. **Admin Panel**: http://localhost:8000/admin/
+---
 
-## 📁 Proje Yapısı
+## Project Structure
 
-```
 BCRIS/
-├── bcris_project/          # Django proje ayarları
-├── rcb_predictor/          # Ana uygulama
-│   ├── models.py           # Veritabanı modelleri
-│   ├── views.py            # View fonksiyonları
-│   ├── admin.py            # Admin panel yapılandırması
-│   └── migrations/         # Veritabanı migration'ları
-├── templates/              # HTML şablonları
-│   ├── rcb_model_all.html  # Ana sayfa
-│   ├── thanks.html         # Teşekkür sayfası
-│   └── physician/          # Hekim sayfaları
-├── static/                 # Statik dosyalar (CSS, JS, images)
-├── media/                  # Yüklenen dosyalar
-├── models/                 # ML model dosyaları
-├── docs/                   # Dokümantasyon
-├── tests/                  # Test dosyaları
-└── manage.py               # Django yönetim scripti
-```
+├── bcris_project/ # Django project settings
+├── rcb_predictor/ # Core application
+│ ├── models.py # Database models
+│ ├── views.py # View functions
+│ ├── admin.py # Admin panel configuration
+│ └── migrations/ # Database migrations
+├── templates/ # HTML templates
+├── static/ # Static files (CSS, JS, images)
+│ ├── languages.json # Homepage translations
+│ └── physician_translations.json # Physician-portal translations
+├── models/ # ML model files
+├── docs/ # Documentation
+├── tests/ # Test files
+└── manage.py
 
-## ✨ Özellikler
+---
 
-### 🎯 Ana Özellikler
-- ✅ RCB kategorisi tahmini (RCB-0, RCB-1, RCB-2, RCB-3)
-- ✅ Excel'den toplu veri yükleme
-- ✅ Değişken bilgi sistemi (i butonu)
-- ✅ Tedavi önerileri
-- ✅ PDF rapor indirme
-- ✅ Çoklu dil desteği (TR/EN)
+## Configuration
 
-### 👨‍⚕️ Hekim Sistemi
-- ✅ Hekim kayıt ve giriş
-- ✅ Hasta verisi yükleme
-- ✅ Admin onay sistemi
-- ✅ Teşekkür sayfası
-
-### 🎨 Admin Panel
-- ✅ Modern Unfold tema
-- ✅ Özellik yönetimi
-- ✅ Kategori seçenekleri
-- ✅ Değişken bilgileri
-- ✅ Tedavi mesajları
-- ✅ ML model yönetimi
-- ✅ Hekim onay sistemi
-- ✅ İndirilebilir dosya yönetimi
-- ✅ Tahmin kontrolü (include_in_prediction)
-
-### 🌐 Çoklu Dil
-- ✅ Türkçe/İngilizce
-- ✅ Tüm sayfalarda dil desteği
-- ✅ localStorage ile tercih saklama
-- ✅ Otomatik dil yükleme
-
-### 📊 Veritabanı Tabanlı
-- ✅ Tüm veriler veritabanında
-- ✅ Hard-code yok
-- ✅ Kolay güncelleme
-- ✅ Admin panelden yönetim
-
-## 🔧 Yapılandırma
-
-### Veritabanı
-`bcris_project/settings.py` dosyasında veritabanı ayarlarını yapılandırın.
+### Database
+Configure database settings in `bcris_project/settings.py`.
 
 ### ML Model
-Admin Panel → ML Modeller → Model Yükle
+Admin Panel → ML Models → Upload Model
 
-### Özellikler
-Admin Panel → Özellikler → Özellik Ekle/Düzenle
+### Variables and Content
+Admin Panel → Variables → Add / Edit
 
-### Dil Dosyaları
-- Ana sayfa: `static/languages.json`
-- Hekim sayfaları: `static/physician_translations.json`
+### Language Files
+- Homepage: `static/languages.json`
+- Physician portal: `static/physician_translations.json`
 
-## 🚀 Deployment
+---
 
-### ⚡ Coolify ile Deployment (Önerilen)
-Dockerfile + SQLite ile 3 dakikada deploy:
-- **Hızlı Başlangıç**: [COOLIFY_SIMPLE.md](COOLIFY_SIMPLE.md) ⭐
-- Sadece 2 environment variable gerekli
-- Veritabanı kurulumu yok (SQLite otomatik)
-- 5 volume ekle, deploy et, bitti!
+## Deployment
 
-### 🐳 Docker ile Manuel Deployment
+### Coolify (Recommended)
+Deploy with Dockerfile + SQLite in under 3 minutes:
+- See [COOLIFY_SIMPLE.md](docs/COOLIFY_SIMPLE.md)
+- Only 2 environment variables required
+- No separate database setup (SQLite auto-created)
+
+### Docker (Manual)
 ```bash
-# Build
 docker build -t bcris .
-
-# Run
 docker run -d \
   -p 8000:8000 \
   -e DJANGO_SECRET_KEY=your-key \
@@ -141,52 +118,50 @@ docker run -d \
   bcris
 ```
 
-### 📚 Detaylı Rehberler
-- **Environment Variables**: [.env.example](.env.example)
-- **Dockerfile**: [Dockerfile](Dockerfile)
-- **Start Script**: [start.sh](start.sh)
-
-## 📚 Dokümantasyon
-
-Detaylı dokümantasyon için `docs/` klasörüne bakın:
-
-- **Genel**: [docs/README.md](docs/README.md)
-- **Django**: [docs/README_DJANGO.md](docs/README_DJANGO.md)
-- **Veritabanı**: [docs/DATABASE_DRIVEN_SYSTEM.md](docs/DATABASE_DRIVEN_SYSTEM.md)
-- **Özellikler**: [docs/TAMAMLANAN_OZELLIKLER_OZET.md](docs/TAMAMLANAN_OZELLIKLER_OZET.md)
-- **Deployment**: [docs/COOLIFY_DEPLOYMENT.md](docs/COOLIFY_DEPLOYMENT.md)
-
-## 🧪 Test
-
-```bash
-# Test klasörüne git
-cd tests/
-
-# Testleri çalıştır
-python test_hekim_sistemi.py
-```
-
-## 🤝 Katkıda Bulunma
-
-1. Fork yapın
-2. Feature branch oluşturun (`git checkout -b feature/AmazingFeature`)
-3. Commit yapın (`git commit -m 'Add some AmazingFeature'`)
-4. Push yapın (`git push origin feature/AmazingFeature`)
-5. Pull Request açın
-
-## 📝 Lisans
-
-Bu proje akademik bir çalışmadır.
-
-## 👥 İletişim
-
-- **Proje Sahibi**: Yusuf Kağan DAĞDEVİREN
-- **Email**: dagdeviren.kagan@gmail.com
-
-## 🙏 Teşekkürler
-
-BCRIS projesine veri katkısında bulunan tüm hekimlere ve kurumlara teşekkür ederiz.
+### Environment Variables
+See [.env.example](.env.example)
 
 ---
 
-**Not**: Bu sistem bir doktora tez çalışmasıdır ve sınırlı sayıda hasta verisi ile geliştirilmiştir. Klinik kullanım öncesinde daha geniş veri setleri ile validasyon gereklidir.
+## Documentation
+
+- General overview: [docs/README.md](docs/README.md)
+- Django notes: [docs/README_DJANGO.md](docs/README_DJANGO.md)
+- Database-driven architecture: [docs/DATABASE_DRIVEN_SYSTEM.md](docs/DATABASE_DRIVEN_SYSTEM.md)
+- Deployment guide: [docs/COOLIFY_DEPLOYMENT.md](docs/COOLIFY_DEPLOYMENT.md)
+
+---
+
+## Tests
+
+```bash
+cd tests/
+python test_hekim_sistemi.py
+```
+
+---
+
+## Citing This Work
+
+If you use BCRIS in your research, please cite the associated manuscript:
+
+> Dağdeviren YK, Kantar O, Bekiş R. *BCRIS: Development and evaluation of a configuration-based, multi-platform clinical decision support system for predicting neoadjuvant chemotherapy response in breast cancer.* BMJ Health & Care Informatics *(submitted)*.
+
+---
+
+## Licence
+
+This project is released under the [MIT Licence](LICENSE).
+
+---
+
+## Contact
+
+- **Author**: Yusuf Kağan Dağdeviren
+- **Corresponding email**: kagan.dagdeviren@deu.edu.tr
+- **Institution**: Dokuz Eylül University Hospital, İzmir, Türkiye
+- **ORCID**: [0000-0003-3814-9401](https://orcid.org/0000-0003-3814-9401)
+
+---
+
+> **Note**: BCRIS is an operational prototype. The prediction model was trained on a single-centre retrospective cohort (n = 328). Prospective multi-centre validation is required before clinical deployment.
